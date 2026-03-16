@@ -1,0 +1,39 @@
+---
+description: Project context for Shruti Ada's portfolio website
+globs: **/*
+alwaysApply: true
+---
+
+# Shruti Ada Portfolio — Project Context
+
+## Tech Stack
+- **Astro 5** static site generator
+- **Tailwind CSS 3** for styling (config in `tailwind.config.mjs`)
+- **GSAP** for scroll-triggered animations
+- **Google Fonts**: Gilda Display (display), PT Serif (body), DM Sans (sans/UI)
+
+## Design System
+- Warm cream/beige backgrounds (`cream-100` through `cream-400`)
+- Gold/amber accents for buttons, dividers, hover states (`warmgold-300` through `warmgold-700`)
+- Charcoal for text (`charcoal-700` through `charcoal-900`)
+- Sage green as optional accent (`sage-300` through `sage-800`)
+
+## Architecture
+- Single-page portfolio with section-based navigation (#illustrations, #projects, #services, #about, #contact)
+- Components are in `src/components/` — each is a self-contained `.astro` file
+- Layout (header, footer, nav, loader) is in `src/layouts/BaseLayout.astro`
+- All artwork images live in `public/images/portfolio/`
+- Image arrays in components define which images appear where
+
+## Key Patterns
+- Use Tailwind utility classes (responsive: `md:`, `lg:` prefixes)
+- Hover overlays use `.card-hover` and `.card-overlay` classes from `global.css`
+- Section dividers use diamond ornaments (`&#x2726;`) with `.section-divider` class
+- Buttons use `.btn-primary` or `.btn-outline` classes
+- GSAP ScrollTrigger animations are defined in `src/pages/index.astro`
+
+## When Editing
+- Keep the warm, elegant aesthetic consistent across changes
+- All new images should go in `public/images/` (referenced as `/images/...`)
+- When adding sections, wrap in `<section>` with an id for navigation
+- Test at mobile (375px), tablet (768px), and desktop (1440px) widths

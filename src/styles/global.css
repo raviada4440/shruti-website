@@ -1,0 +1,90 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url("https://fonts.googleapis.com/css2?family=Gilda+Display&family=PT+Serif:ital,wght@0,400;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap");
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-cream-100 text-charcoal-800 font-body;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    @apply bg-sage-400/30 text-charcoal-900;
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-display;
+  }
+}
+
+@layer components {
+  .section-divider {
+    @apply w-full flex items-center justify-center gap-4 py-8;
+  }
+
+  .section-divider::before,
+  .section-divider::after {
+    content: "";
+    @apply flex-1 h-px bg-warmgold-400/40;
+  }
+
+  .divider-ornament {
+    @apply text-warmgold-500 text-xl tracking-[0.3em];
+  }
+
+  .btn-primary {
+    @apply inline-block border border-warmgold-500 text-warmgold-600 
+           px-8 py-3 font-sans text-sm tracking-[0.15em] uppercase
+           transition-all duration-300 hover:bg-warmgold-500 hover:text-cream-50;
+  }
+
+  .btn-outline {
+    @apply inline-block border border-charcoal-700 text-charcoal-700
+           px-8 py-3 font-sans text-sm tracking-[0.15em] uppercase
+           transition-all duration-300 hover:bg-charcoal-800 hover:text-cream-50;
+  }
+
+  .card-hover {
+    @apply relative overflow-hidden group cursor-pointer;
+  }
+
+  .card-hover .card-overlay {
+    @apply absolute inset-0 bg-charcoal-900/60 flex items-end p-6
+           opacity-0 group-hover:opacity-100 transition-opacity duration-500;
+  }
+
+  .scroll-container {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .scroll-container::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .animate-delay-200 {
+    animation-delay: 200ms;
+  }
+
+  .animate-delay-400 {
+    animation-delay: 400ms;
+  }
+
+  .animate-delay-600 {
+    animation-delay: 600ms;
+  }
+}

@@ -1,0 +1,59 @@
+---
+const services = [
+  {
+    title: "Background Art & Layout",
+    icon: `<svg class="w-10 h-10" fill="none" stroke="currentColor" stroke-width="1.2" viewBox="0 0 24 24"><path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>`,
+    items: ["Scene Painting", "Layout Design", "Color Keys", "Environment Design", "Atmospheric Studies"],
+  },
+  {
+    title: "Prop Design",
+    icon: `<svg class="w-10 h-10" fill="none" stroke="currentColor" stroke-width="1.2" viewBox="0 0 24 24"><path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>`,
+    items: ["Character Props", "Vehicle Design", "Object Turnarounds", "Visual Development", "Style Guides"],
+  },
+  {
+    title: "Illustration",
+    icon: `<svg class="w-10 h-10" fill="none" stroke="currentColor" stroke-width="1.2" viewBox="0 0 24 24"><path d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg>`,
+    items: ["Editorial Illustration", "Landscape Art", "Character Design", "Concept Art", "Digital Painting"],
+  },
+  {
+    title: "Graphic Design",
+    icon: `<svg class="w-10 h-10" fill="none" stroke="currentColor" stroke-width="1.2" viewBox="0 0 24 24"><path d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/></svg>`,
+    items: ["Branding & Identity", "Logo Design", "Social Media Content", "Print Design", "Art Direction"],
+  },
+];
+---
+
+<section id="services" class="py-20 md:py-28">
+  <div class="max-w-5xl mx-auto px-6 md:px-12">
+    <div class="section-divider">
+      <span class="divider-ornament">&#x2726;&#x2726;</span>
+      <span class="divider-ornament">&#x2726;&#x2726;</span>
+    </div>
+    <h2 class="font-display text-3xl sm:text-4xl md:text-5xl text-center text-charcoal-800 tracking-wide">
+      SERVICES
+    </h2>
+    <div class="h-px bg-warmgold-400/30 mt-6 mb-14"></div>
+
+    <div class="grid sm:grid-cols-2 gap-8 md:gap-10">
+      {services.map((service) => (
+        <div class="group p-6 md:p-8 border border-warmgold-400/20 rounded-sm hover:border-warmgold-400/50 transition-all duration-500 hover:shadow-lg hover:shadow-warmgold-300/10">
+          <div class="flex items-start gap-4 mb-5">
+            <div class="text-warmgold-500 shrink-0 mt-1" set:html={service.icon} />
+            <h3 class="font-display text-xl md:text-2xl text-charcoal-800 group-hover:text-warmgold-600 transition-colors">
+              {service.title}
+            </h3>
+          </div>
+          <div class="h-px bg-warmgold-400/20 mb-5"></div>
+          <ul class="space-y-2">
+            {service.items.map((item) => (
+              <li class="font-sans text-sm text-charcoal-700/80 flex items-center gap-2">
+                <span class="w-1 h-1 rounded-full bg-warmgold-400 shrink-0"></span>
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

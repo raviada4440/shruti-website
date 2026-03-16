@@ -1,0 +1,87 @@
+---
+const projects = [
+  {
+    title: "In The Shadows",
+    category: "Background Art & Layout",
+    image: "/images/portfolio/mansion-scene-layout.jpg",
+    description: "Environment design and layout work",
+  },
+  {
+    title: "Monster House",
+    category: "Background Art",
+    image: "/images/portfolio/opening-scene-mh.jpg",
+    description: "Scene painting and atmospheric backgrounds",
+  },
+  {
+    title: "Legally Blonde",
+    category: "Prop Design",
+    image: "/images/portfolio/prop-3.png",
+    description: "Prop design and visual development",
+  },
+  {
+    title: "KOTN Production",
+    category: "Production Background Art",
+    image: "/images/portfolio/kotn-bg31.jpg",
+    description: "Professional production background paintings",
+  },
+  {
+    title: "Environment Studies",
+    category: "Background Art",
+    image: "/images/portfolio/bg-art-4.png",
+    description: "Atmospheric environment explorations",
+  },
+  {
+    title: "Animated Shorts",
+    category: "Background & Props",
+    image: "/images/portfolio/scene-3-mh.jpg",
+    description: "Short film background and prop work",
+  },
+];
+---
+
+<section id="projects" class="py-20 md:py-28 bg-cream-200/50">
+  <div class="max-w-6xl mx-auto px-6 md:px-12">
+    <div class="section-divider">
+      <span class="divider-ornament">&#x2726;&#x2726;</span>
+      <span class="divider-ornament">&#x2726;&#x2726;</span>
+    </div>
+    <h2 class="font-display text-3xl sm:text-4xl md:text-5xl text-center text-charcoal-800 tracking-wide">
+      PROJECTS
+    </h2>
+    <div class="h-px bg-warmgold-400/30 mt-6 mb-14"></div>
+
+    <!-- Grid -->
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+      {projects.map((project) => (
+        <a href="#" class="block group">
+          <div class="card-hover rounded-sm overflow-hidden aspect-[4/3] mb-4">
+            <img
+              src={project.image}
+              alt={project.title}
+              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+              loading="lazy"
+            />
+            <div class="card-overlay">
+              <div>
+                <p class="font-sans text-[10px] tracking-[0.2em] uppercase text-cream-200/70 mb-1">
+                  {project.category}
+                </p>
+                <p class="font-body text-sm text-cream-100/90">{project.description}</p>
+              </div>
+            </div>
+          </div>
+          <h3 class="font-display text-lg text-charcoal-800 group-hover:text-warmgold-500 transition-colors">
+            {project.title}
+          </h3>
+          <p class="font-sans text-xs tracking-[0.1em] uppercase text-charcoal-700/60 mt-1">
+            {project.category}
+          </p>
+        </a>
+      ))}
+    </div>
+
+    <div class="text-center mt-14">
+      <a href="#" class="btn-primary">More Work</a>
+    </div>
+  </div>
+</section>

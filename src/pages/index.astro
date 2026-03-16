@@ -1,0 +1,90 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Hero from "../components/Hero.astro";
+import IllustrationsCarousel from "../components/IllustrationsCarousel.astro";
+import GalleryStrip from "../components/GalleryStrip.astro";
+import About from "../components/About.astro";
+import ProjectsGrid from "../components/ProjectsGrid.astro";
+import Services from "../components/Services.astro";
+import Contact from "../components/Contact.astro";
+---
+
+<BaseLayout>
+  <Hero />
+  <IllustrationsCarousel />
+  <GalleryStrip />
+  <About />
+  <ProjectsGrid />
+  <Services />
+  <Contact />
+</BaseLayout>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Fade-in-up for sections
+  gsap.utils.toArray<HTMLElement>("#about, #projects, #services, #contact").forEach((section) => {
+    gsap.from(section, {
+      scrollTrigger: {
+        trigger: section,
+        start: "top 85%",
+        toggleActions: "play none none none",
+      },
+      opacity: 0,
+      y: 50,
+      duration: 0.9,
+      ease: "power2.out",
+    });
+  });
+
+  // Staggered fade for project cards
+  gsap.utils.toArray<HTMLElement>("#projects a").forEach((card, i) => {
+    gsap.from(card, {
+      scrollTrigger: {
+        trigger: card,
+        start: "top 90%",
+        toggleActions: "play none none none",
+      },
+      opacity: 0,
+      y: 40,
+      duration: 0.7,
+      delay: i * 0.1,
+      ease: "power2.out",
+    });
+  });
+
+  // Staggered fade for service cards
+  gsap.utils.toArray<HTMLElement>("#services .group").forEach((card, i) => {
+    gsap.from(card, {
+      scrollTrigger: {
+        trigger: card,
+        start: "top 90%",
+        toggleActions: "play none none none",
+      },
+      opacity: 0,
+      y: 30,
+      duration: 0.6,
+      delay: i * 0.12,
+      ease: "power2.out",
+    });
+  });
+
+  // Gallery strip masonry items
+  gsap.utils.toArray<HTMLElement>(".columns-2 .break-inside-avoid").forEach((item, i) => {
+    gsap.from(item, {
+      scrollTrigger: {
+        trigger: item,
+        start: "top 92%",
+        toggleActions: "play none none none",
+      },
+      opacity: 0,
+      scale: 0.95,
+      duration: 0.5,
+      delay: i * 0.06,
+      ease: "power2.out",
+    });
+  });
+</script>
