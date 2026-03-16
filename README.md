@@ -106,15 +106,62 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
 The file name becomes the URL route (e.g., `src/pages/about.astro` → `/about`).
 
-## Deploying to Netlify
+## Deployment: Coolify + Hetzner + Cloudflare
 
-1. Push this repo to GitHub
-2. Go to [netlify.com](https://netlify.com) and sign in with GitHub
-3. Click "Add new site" → "Import an existing project"
-4. Select this repo
-5. Build settings are auto-detected (build command: `npm run build`, publish dir: `dist/`)
-6. Click "Deploy site"
-7. In Domain Settings, point `shrutiada.com` to Netlify
+### 1. Hetzner Setup
+- Create a **CX22** (or similar) VPS on [Hetzner Cloud](https://hetzner.cloud)
+- Choose **Ubuntu 24.04** as the OS
+- Note the server IP address
+
+### 2. Install Coolify
+SSH into your Hetzner server and run:
+```bash
+curl -fsSL https://cdn.coollabs.io/coolify/install.sh | bash
+```
+Coolify will be available at `http://<your-server-ip>:8000`. Create your admin account.
+
+### 3. Connect GitHub Repo
+- In Coolify dashboard, go to **Sources** → Add GitHub App
+- Follow the OAuth flow to connect your GitHub account
+- Go to **Projects** → New → select this repo
+- Coolify auto-detects the `Dockerfile` — no extra config needed
+
+### 4. Deploy
+- Click **Deploy** in Coolify — it builds the Docker image and starts the container
+- Coolify handles SSL via Let's Encrypt automatically
+
+### 5. Cloudflare DNS
+1. Add `shrutiada.com` to [Cloudflare](https://dash.cloudflare.com)
+2. Update your domain registrar's nameservers to Cloudflare's
+3. In Cloudflare DNS, add an **A record**:
+   - Name: `@`
+   - Content: `<your Hetzner server IP>`
+   - Proxy: **ON** (orange cloud)
+4. Add a **CNAME** for `www`:
+   - Name: `www`
+   - Content: `shrutiada.com`
+   - Proxy: **ON**
+
+### 6. Cloudflare Settings (Recommended)
+- **SSL/TLS** → Set to **Full (Strict)**
+- **Speed → Optimization** → Enable Auto Minify (HTML, CSS, JS)
+- **Caching → Configuration** → Set Browser Cache TTL to 1 month
+- **Rules** → Create a Page Rule: `*shrutiada.com/*` → Cache Level: Cache Everything
+
+### 7. Set Domain in Coolify
+- In your Coolify project settings, set the domain to `shrutiada.com`
+- Coolify will configure the reverse proxy and SSL automatically
+
+### Docker (Local Testing)
+```bash
+# Build image
+docker build -t shruti-portfolio .
+
+# Run locally
+docker run -p 8080:80 shruti-portfolio
+
+# Open http://localhost:8080
+```
 
 ## Using Cursor to Edit This Site
 
