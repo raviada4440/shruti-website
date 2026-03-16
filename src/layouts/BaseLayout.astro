@@ -1,4 +1,6 @@
 ---
+import "../styles/global.css";
+
 interface Props {
   title?: string;
   description?: string;
@@ -31,19 +33,25 @@ const {
 
     <header id="site-header" class="fixed top-0 left-0 right-0 z-50 bg-cream-100/95 backdrop-blur-sm transition-transform duration-300">
       <div class="flex items-center justify-between px-6 md:px-12 py-4">
-        <button id="menu-toggle" class="z-50 flex flex-col gap-[5px] group" aria-label="Toggle menu">
+        <a href="/" class="font-display text-warmgold-500 text-2xl tracking-wide">
+          SA
+        </a>
+
+        <!-- Desktop nav -->
+        <nav class="hidden md:flex items-center gap-8">
+          <a href="#illustrations" class="font-sans text-xs tracking-[0.15em] uppercase text-charcoal-700 hover:text-warmgold-500 transition-colors">Illustrations</a>
+          <a href="#projects" class="font-sans text-xs tracking-[0.15em] uppercase text-charcoal-700 hover:text-warmgold-500 transition-colors">Projects</a>
+          <a href="#services" class="font-sans text-xs tracking-[0.15em] uppercase text-charcoal-700 hover:text-warmgold-500 transition-colors">Services</a>
+          <a href="#about" class="font-sans text-xs tracking-[0.15em] uppercase text-charcoal-700 hover:text-warmgold-500 transition-colors">About</a>
+          <a href="#contact" class="font-sans text-xs tracking-[0.15em] uppercase text-charcoal-700 hover:text-warmgold-500 transition-colors">Contact</a>
+        </nav>
+
+        <!-- Mobile hamburger -->
+        <button id="menu-toggle" class="z-50 flex flex-col gap-[5px] group md:hidden" aria-label="Toggle menu">
           <span class="block w-6 h-[2px] bg-charcoal-800 transition-all duration-300 origin-center group-[.is-open]:rotate-45 group-[.is-open]:translate-y-[7px]"></span>
           <span class="block w-6 h-[2px] bg-charcoal-800 transition-all duration-300 group-[.is-open]:opacity-0"></span>
           <span class="block w-6 h-[2px] bg-charcoal-800 transition-all duration-300 origin-center group-[.is-open]:-rotate-45 group-[.is-open]:-translate-y-[7px]"></span>
         </button>
-
-        <a href="/" class="absolute left-1/2 -translate-x-1/2 font-display text-warmgold-500 text-2xl tracking-wide">
-          SA
-        </a>
-
-        <a href="mailto:shrutiada19@gmail.com" class="font-sans text-xs tracking-[0.1em] text-charcoal-700 hover:text-warmgold-500 transition-colors hidden md:block">
-          CONTACT
-        </a>
       </div>
 
       <div class="h-px bg-warmgold-400/30"></div>
@@ -95,6 +103,23 @@ const {
         </div>
       </div>
     </footer>
+
+    <!-- Lightbox modal -->
+    <div id="lightbox" class="lightbox">
+      <div class="lightbox-backdrop"></div>
+      <button id="lightbox-close" class="lightbox-close" aria-label="Close">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+      <button id="lightbox-prev" class="lightbox-nav lightbox-prev-btn" aria-label="Previous image">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7"/></svg>
+      </button>
+      <button id="lightbox-next" class="lightbox-nav lightbox-next-btn" aria-label="Next image">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg>
+      </button>
+      <div class="lightbox-img-wrapper">
+        <img id="lightbox-img" src="" alt="" />
+      </div>
+    </div>
 
     <button id="to-top" class="fixed bottom-6 right-6 w-12 h-12 rounded-full border border-warmgold-400/50 bg-cream-100/90 backdrop-blur-sm flex items-center justify-center text-warmgold-500 hover:bg-warmgold-500 hover:text-cream-50 transition-all duration-300 opacity-0 translate-y-4 pointer-events-none z-50" aria-label="Back to top">
       <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 15l7-7 7 7"/></svg>
@@ -157,6 +182,52 @@ const {
 
       document.getElementById("to-top")!.addEventListener("click", () => {
         window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+
+      // Lightbox
+      const lightbox = document.getElementById("lightbox")!;
+      const lightboxImg = document.getElementById("lightbox-img") as HTMLImageElement;
+      const triggers = Array.from(document.querySelectorAll<HTMLElement>("[data-lightbox]"));
+      let currentIndex = 0;
+
+      function openLightbox(index: number) {
+        currentIndex = index;
+        const el = triggers[index];
+        lightboxImg.src = el.dataset.lightboxSrc || "";
+        lightboxImg.alt = el.dataset.lightboxAlt || "";
+        lightbox.classList.add("is-open");
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeLightbox() {
+        lightbox.classList.remove("is-open");
+        document.body.style.overflow = "";
+      }
+
+      function navigate(dir: number) {
+        currentIndex = (currentIndex + dir + triggers.length) % triggers.length;
+        const el = triggers[currentIndex];
+        lightboxImg.src = el.dataset.lightboxSrc || "";
+        lightboxImg.alt = el.dataset.lightboxAlt || "";
+      }
+
+      triggers.forEach((el, i) => {
+        el.addEventListener("click", (e) => {
+          e.preventDefault();
+          openLightbox(i);
+        });
+      });
+
+      document.getElementById("lightbox-close")!.addEventListener("click", closeLightbox);
+      document.querySelector(".lightbox-backdrop")!.addEventListener("click", closeLightbox);
+      document.getElementById("lightbox-prev")!.addEventListener("click", () => navigate(-1));
+      document.getElementById("lightbox-next")!.addEventListener("click", () => navigate(1));
+
+      document.addEventListener("keydown", (e) => {
+        if (!lightbox.classList.contains("is-open")) return;
+        if (e.key === "Escape") closeLightbox();
+        if (e.key === "ArrowLeft") navigate(-1);
+        if (e.key === "ArrowRight") navigate(1);
       });
     </script>
   </body>

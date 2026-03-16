@@ -22,7 +22,7 @@ const images = [
     <div class="columns-2 md:columns-3 lg:columns-4 gap-3 md:gap-4">
       {images.map((img, i) => (
         <div class="break-inside-avoid mb-3 md:mb-4">
-          <div class="card-hover rounded-sm overflow-hidden">
+          <div class="card-hover group rounded-sm overflow-hidden" data-lightbox data-lightbox-src={img.src} data-lightbox-alt={img.alt}>
             <img
               src={img.src}
               alt={img.alt}

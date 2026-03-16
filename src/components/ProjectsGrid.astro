@@ -53,8 +53,8 @@ const projects = [
     <!-- Grid -->
     <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
       {projects.map((project) => (
-        <a href="#" class="block group">
-          <div class="card-hover rounded-sm overflow-hidden aspect-[4/3] mb-4">
+        <div class="block group cursor-pointer">
+          <div class="card-hover group rounded-sm overflow-hidden aspect-[4/3] mb-4" data-lightbox data-lightbox-src={project.image} data-lightbox-alt={project.title}>
             <img
               src={project.image}
               alt={project.title}
@@ -76,7 +76,7 @@ const projects = [
           <p class="font-sans text-xs tracking-[0.1em] uppercase text-charcoal-700/60 mt-1">
             {project.category}
           </p>
-        </a>
+        </div>
       ))}
     </div>
 

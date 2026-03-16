@@ -30,7 +30,7 @@ const illustrations = [
     <div id="carousel" class="flex gap-4 md:gap-6 overflow-x-auto scroll-container px-6 md:px-12 snap-x snap-mandatory pb-4">
       {illustrations.map((item) => (
         <div class="snap-start shrink-0 w-[80vw] sm:w-[60vw] md:w-[45vw] lg:w-[35vw]">
-          <div class="card-hover rounded-sm overflow-hidden aspect-[16/10]">
+          <div class="card-hover group rounded-sm overflow-hidden aspect-[16/10]" data-lightbox data-lightbox-src={item.src} data-lightbox-alt={item.title}>
             <img
               src={item.src}
               alt={item.title}

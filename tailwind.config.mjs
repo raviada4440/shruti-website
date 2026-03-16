@@ -44,6 +44,7 @@ export default {
         "slide-in-right": "slideInRight 0.6s ease-out forwards",
         "logo-reveal": "logoReveal 1.5s ease-out forwards",
         "hero-fade": "heroFade 1s ease-out 1.2s forwards",
+        "spin-slow": "spin 20s linear infinite",
       },
       keyframes: {
         fadeIn: {

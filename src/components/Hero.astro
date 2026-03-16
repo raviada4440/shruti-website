@@ -1,4 +1,7 @@
 ---
+const circleText = "ILLUSTRATOR · BACKGROUND ARTIST · DESIGNER · ";
+const chars = circleText.split("");
+const degPerChar = 360 / chars.length;
 ---
 
 <section class="relative min-h-screen flex flex-col items-center justify-center overflow-hidden pt-16">
@@ -16,22 +19,24 @@
   <!-- Name & title -->
   <div class="relative z-10 text-center px-6 opacity-0 animate-hero-fade">
     <div class="mb-6">
-      <div class="w-24 h-24 md:w-32 md:h-32 mx-auto mb-6 rounded-full border-2 border-warmgold-400/40 flex items-center justify-center">
-        <span class="font-display text-warmgold-500 text-4xl md:text-5xl">S</span>
-      </div>
-
-      <!-- Circular text badge -->
-      <div class="relative inline-block mb-4">
-        <svg class="w-40 h-40 md:w-52 md:h-52 mx-auto" viewBox="0 0 200 200">
-          <defs>
-            <path id="circlePath" d="M 100, 100 m -70, 0 a 70,70 0 1,1 140,0 a 70,70 0 1,1 -140,0" fill="none" />
-          </defs>
-          <text class="fill-warmgold-400 text-[11px] md:text-[12px] tracking-[0.35em] uppercase" style="font-family: 'DM Sans', sans-serif;">
-            <textPath href="#circlePath" startOffset="0%">
-              illustrator • background artist • designer •
-            </textPath>
-          </text>
-        </svg>
+      <div class="relative w-60 h-60 md:w-80 md:h-80 mx-auto">
+        <!-- Circle with owl logo -->
+        <div class="absolute inset-0 flex items-center justify-center">
+          <div class="w-44 h-44 md:w-52 md:h-52 rounded-full border-2 border-warmgold-500/60 bg-white flex items-center justify-center overflow-hidden">
+            <img src="/images/owl-cropped.png" alt="Shruti Ada" class="w-full h-full object-contain p-2" />
+          </div>
+        </div>
+        <!-- Rotating circular text -->
+        <div class="circular-text absolute inset-0 animate-spin-slow" aria-hidden="true">
+          {chars.map((char, i) => (
+            <span
+              class="circular-char absolute left-1/2 top-0 font-sans text-warmgold-500 uppercase"
+              style={`transform: rotate(${(degPerChar * i).toFixed(1)}deg);`}
+            >
+              {char}
+            </span>
+          ))}
+        </div>
       </div>
     </div>
 
@@ -60,3 +65,19 @@
     </svg>
   </div>
 </section>
+
+<style>
+  .circular-char {
+    font-size: 11px;
+    transform-origin: 0 120px;
+    width: 0;
+    display: inline-block;
+    text-align: center;
+  }
+  @media (min-width: 768px) {
+    .circular-char {
+      font-size: 13px;
+      transform-origin: 0 160px;
+    }
+  }
+</style>
