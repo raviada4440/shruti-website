@@ -1,0 +1,81 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="About — Shruti Ada">
+  <div class="max-w-[1366px] mx-auto px-6 md:px-12 py-8 md:py-12">
+    <!-- Header -->
+    <div class="text-center mb-12">
+      <h1 class="text-5xl md:text-6xl lg:text-[96px] leading-[1.05]">learn about me!</h1>
+    </div>
+
+    <!-- Bio section -->
+    <section class="flex flex-col md:flex-row gap-8 md:gap-16 items-start">
+      <!-- Photos -->
+      <div class="flex flex-col gap-4 w-full md:w-1/2">
+        <img src="/images/about/shruti-photo-1.png" alt="Shruti Ada" class="w-full max-w-md object-cover rounded-sm" />
+        <img src="/images/about/shruti-photo-2.png" alt="Shruti Ada" class="w-2/3 max-w-xs object-cover rounded-sm" />
+      </div>
+
+      <!-- Text -->
+      <div class="flex-1 space-y-6">
+        <div class="flex items-start justify-between">
+          <p class="font-body text-xl md:text-2xl">as you know my name is shruti</p>
+          <p class="font-body text-xl md:text-2xl">texan raised</p>
+        </div>
+
+        <p class="font-body text-xl md:text-2xl">
+          many know me as "shroot"<br />(like groot)
+        </p>
+
+        <p class="font-body text-base md:text-lg leading-relaxed">
+          I'm an illustrator and designer based in California who genuinely, embarrassingly cares about the work I make for people.
+        </p>
+
+        <p class="font-body text-base md:text-lg leading-relaxed">
+          I came up as an illustrator first, which means I see every design problem through an artist's lens. Where most designers think in grids and guidelines, I think in stories, characters, and visuals that make people feel something. That perspective is what makes the work different. And honestly? It's what makes it fun.
+        </p>
+
+        <p class="font-body text-base md:text-lg leading-relaxed">
+          Whether you're building a brand from scratch, need a website that finally looks like you, or just want your Instagram to stop looking like a cry for help, I got you.
+        </p>
+      </div>
+    </section>
+
+    <!-- Likes -->
+    <section class="py-16 md:py-20">
+      <p class="font-body text-xl md:text-2xl text-center mb-8">just some of my likes for fun</p>
+      <div class="flex flex-wrap items-center justify-center gap-x-12 md:gap-x-20 gap-y-6">
+        <span class="font-body text-xl md:text-2xl">soup</span>
+        <span class="font-body text-xl md:text-2xl">movies</span>
+        <span class="font-body text-xl md:text-2xl">dancing</span>
+        <span class="font-body text-xl md:text-2xl">board games</span>
+        <span class="font-body text-xl md:text-2xl">beans</span>
+      </div>
+      <div class="flex justify-center gap-4 mt-6">
+        <img src="/images/about/photo-1.png" alt="" class="w-10 h-10 object-cover" />
+        <img src="/images/about/photo-2.png" alt="" class="w-10 h-10 object-cover" />
+        <img src="/images/about/photo-3.png" alt="" class="w-10 h-10 object-cover" />
+        <img src="/images/about/photo-4.png" alt="" class="w-10 h-10 object-cover" />
+      </div>
+    </section>
+
+    <!-- Contact CTA -->
+    <section class="py-16 md:py-24 border-t border-black/10">
+      <h2 class="text-3xl md:text-4xl lg:text-[48px] leading-[1.1] text-center max-w-4xl mx-auto">
+        if you still want to work with me after all of that... you're a keeper
+      </h2>
+
+      <div class="text-center mt-12">
+        <h3 class="text-3xl md:text-4xl lg:text-[48px] leading-[1.1]">contact me here:</h3>
+        <a href="mailto:shrutiada19@gmail.com" class="block font-body text-2xl md:text-4xl mt-6 hover:opacity-60 transition-opacity">
+          shrutiada19@gmail.com
+        </a>
+      </div>
+
+      <div class="flex justify-center mt-12">
+        <img src="/images/doodles/stickfigure-1.png" alt="" class="w-28 md:w-36" />
+      </div>
+    </section>
+  </div>
+</BaseLayout>
