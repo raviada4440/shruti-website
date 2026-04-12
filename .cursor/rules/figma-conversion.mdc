@@ -1,0 +1,190 @@
+---
+description: Figma-to-code conversion playbook — all learnings from building this site
+globs: src/pages/**/*.astro, src/components/**/*.astro
+alwaysApply: true
+---
+
+# Figma-to-Code Conversion Playbook
+
+These rules capture every lesson learned while converting Figma designs to Astro pages. Follow them strictly when creating or editing any page.
+
+## 1. Units — vw Everywhere, Never px
+
+**Rule**: ALL sizing values must use `vw` units. Never hardcode `px` for font-size, line-height, letter-spacing, padding, margin, width, height, or gap.
+
+**Conversion formula**: `figma_px / 1365 * 100 = vw`
+
+The Figma frame width is 1365px. Every absolute pixel value from Figma must be converted.
+
+**Why**: Fixed px values break at different viewport widths. Using vw ensures the layout scales proportionally at any screen size — from a small laptop to an ultra-wide monitor.
+
+**Common mistakes to avoid**:
+- Don't set `max-width` on the page canvas — let it fill the viewport
+- Don't set fixed `width` on text elements — it causes premature wrapping
+- Don't mix px and vw on the same page
+
+## 2. Doodle Images — Always Pre-Render from Figma
+
+**Rule**: When placing hand-drawn doodle images, NEVER attempt to replicate Figma transforms (rotation, flip, scale) with CSS. Instead, render the Figma node directly as a PNG.
+
+**Process**:
+1. Find the doodle node in `scripts/figma-cache/all-pages.json` — search by name
+2. Get the node ID (e.g., `3:134`)
+3. Call Figma render API:
+   ```
+   GET https://api.figma.com/v1/images/fzcw08xG5ByHbIZnnxR2GY?ids=NODE_ID&format=png&scale=2
+   ```
+4. Download the rendered PNG to `public/images/doodles/`
+5. Reference as `<img src="/images/doodles/name.png">`
+
+**Why**: Figma stores transforms as `relativeTransform` matrices. Reverse-engineering these into CSS `rotate()` + `scaleX()` + `scaleY()` is error-prone and was wrong multiple times. Pre-rendering bakes all transforms into the pixel data.
+
+**Transparent padding**: Some rendered doodles have excessive transparent borders. Crop with Python Pillow:
+```python
+from PIL import Image
+img = Image.open("doodle.png")
+bbox = img.getbbox()
+img.crop(bbox).save("doodle-cropped.png")
+```
+
+## 3. Doodle Placement — Absolute Position with vw
+
+**Rule**: Doodles are positioned with `position: absolute` inside a `position: relative` parent, using vw values for `left`, `right`, `top`, `bottom`, and `width`.
+
+**Deriving positions from Figma**:
+1. Get the doodle's `absoluteBoundingBox` from the cache (x, y, width, height)
+2. Get the parent section's `absoluteBoundingBox`
+3. Compute offsets: `left_vw = (doodle.x - parent.x) / 1365 * 100`
+4. Compute size: `width_vw = doodle.width / 1365 * 100`
+
+**Important**: Always set `pointer-events: none` on doodles and `overflow: visible` or `overflow: hidden` on the parent depending on whether the doodle should bleed out of its section.
+
+## 4. Text Styles — Extract from Figma Node Data
+
+**Rule**: Never guess font sizes, weights, or families. Always extract from the Figma cache.
+
+**Where to find it**: Each text node in `all-pages.json` has a `style` object:
+```json
+{
+  "fontFamily": "NewUnderground",
+  "fontWeight": 700,
+  "fontSize": 64,
+  "textAlignHorizontal": "CENTER",
+  "lineHeightPx": 70,
+  "letterSpacing": 0
+}
+```
+
+Convert `fontSize`, `lineHeightPx`, `letterSpacing` to vw using the standard formula.
+
+**Alignment**: Map `textAlignHorizontal` → CSS `text-align`:
+- `"LEFT"` → `text-align: left`
+- `"CENTER"` → `text-align: center`
+- `"RIGHT"` → `text-align: right`
+
+**No-wrap rule**: Section headings and subtitles should never wrap to a second line. Don't set explicit `width` on text containers; use `white-space: nowrap` if needed.
+
+## 5. Marquee Animations
+
+**Pattern for infinite scrolling marquees**:
+
+1. Duplicate the entire image set in HTML (for seamless loop)
+2. CSS animation translates by -50% (since content is doubled)
+3. Alternating directions: odd marquees `scroll-rtl`, even marquees `scroll-ltr`
+4. Pause animation on hover: `.marquee-wrap:hover .marquee-track { animation-play-state: paused }`
+
+**Current speeds**: 160s for gallery/detail marquees, 180s for landing page, 140s for works detail
+
+**Marquee images should be clickable**: Wrap each in an `<a>` tag linking to the detail page (`/illustrations/[slug]` or `/works/[slug]`)
+
+## 6. Page Architecture Patterns
+
+### Gallery Pages (`illustrations.astro`, `works.astro`)
+- Header with centered title + doodle
+- 3 marquee strips with alternating scroll directions
+- Images link to individual detail pages
+- Data sourced from `src/data/portfolio.ts`
+
+### Illustration Detail Pages (`illustrations/[slug].astro`)
+- Full-width hero image of the clicked illustration
+- Category label
+- Marquee strip of other illustrations (clickable to navigate)
+- CTA section: "Like what you see?" + doodles + email link
+
+### Works Detail Pages (`works/[slug].astro`)
+- Title, description, and subtitle (no hero image at top)
+- Flexible `sections` rendered in order from `portfolio.ts`:
+  - `full-width`: Large centered image
+  - `marquee`: Scrolling strip (clicking swaps the full-width image above)
+  - `masonry`: CSS `columns: 2` grid with optional label
+- CTA section identical to illustration detail pages
+
+### Services Page (`services.astro`)
+- Title + two subtitle lines
+- 4 alternating left/right service blocks
+- Doodles between sections (absolute positioned)
+- "Interested?" CTA with email link
+- Bottom section with social links
+
+### About Page (`about.astro`)
+- "learn about me!" title with corner doodles
+- Photos with floating text labels (absolute positioned)
+- Bio text
+- "Likes" section with scattered/sprinkled items (absolute positioned at specific coordinates)
+- CTA with email link and bottom doodle
+
+## 7. Figma Cache Structure
+
+All cached data lives in `scripts/figma-cache/`:
+
+- `all-pages.json` — Full Figma node tree for all pages. Search by `name` to find any element.
+- `image-fills.json` — Maps `imageRef` hashes to downloadable URLs
+- `renders/` — Pre-rendered PNGs from the Figma render API
+
+**Page node IDs** (use these to find page-level content):
+- Landing: `0:1`
+- Gallery: `2:8`
+- Individual View: `3:47`
+- Case Study: `3:76`
+- Services: `3:132`
+- About: `4:183`
+
+**Figma file key**: `fzcw08xG5ByHbIZnnxR2GY`
+
+## 8. Common Pitfalls (Things That Went Wrong Before)
+
+| Problem | Wrong approach | Correct approach |
+|---------|---------------|------------------|
+| Doodle orientation wrong | CSS `transform: rotate(90deg)` | Render from Figma API as PNG |
+| Layout breaks on wide screens | Fixed `px` values + `max-width` | All values in `vw`, no max-width |
+| Subtitle text wrapping | Fixed `width` on text container | Remove width, use `white-space: nowrap` |
+| Doodle has invisible padding | Use as-is from Figma render | Crop with Pillow `getbbox()` |
+| Header nav broken on sub-pages | `href="#section"` anchor links | `href="/page"` proper routes |
+| Marquee not seamless | Single set of images | Duplicate images, translate -50% |
+| Elements overlap | Guess spacing | Extract `absoluteBoundingBox` from cache |
+| Works gallery empty after refactor | Replaced data structure | Extend existing interface, keep all entries |
+
+## 9. Adding a New Page from Figma
+
+Step-by-step process:
+
+1. **Find the page** in `scripts/figma-cache/all-pages.json` by its node ID or name
+2. **Inventory all elements**: headings, body text, images, doodles — note their node IDs
+3. **Extract text styles**: font family, size, weight, alignment from `style` property
+4. **Extract positions**: use `absoluteBoundingBox` and convert all values to vw
+5. **Render doodles**: call Figma API for each doodle node, save to `public/images/doodles/`
+6. **Download images**: use `image-fills.json` to get fill image URLs, save to `public/images/`
+7. **Build the Astro page**: use `BaseLayout`, position everything with vw-based CSS
+8. **Add navigation**: update `Header.astro` if a new nav link is needed
+9. **Test at multiple viewport widths**: everything should scale proportionally
+
+## 10. Mobile Responsive Considerations
+
+The current site is built for desktop-first using Figma's desktop frame (1365px). When building mobile versions:
+
+- The vw-based approach will scale down naturally, but elements may become too small
+- You'll likely need `@media` breakpoints to reorganize layout (e.g., stack side-by-side elements)
+- Marquees may need fewer visible items on mobile
+- Absolute-positioned doodles may need different coordinates at mobile breakpoints
+- Text that uses `white-space: nowrap` may overflow on mobile — consider allowing wrap below a breakpoint
+- The Figma mobile page (if she creates one) will have its own frame width — adjust the vw formula accordingly

@@ -1,0 +1,196 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { illustrations } from "../../data/portfolio";
+
+export function getStaticPaths() {
+  return illustrations.map((item) => ({
+    params: { slug: item.slug },
+  }));
+}
+
+const { slug } = Astro.params;
+const current = illustrations.find((i) => i.slug === slug)!;
+const others = illustrations.filter((i) => i.slug !== slug);
+---
+
+<BaseLayout title={`${current.alt} — Shruti Ada`}>
+  <div class="illust-detail">
+
+    <div class="hero-wrap">
+      <img src={current.src} alt={current.alt} class="hero-img" />
+    </div>
+
+    <div class="detail-info">
+      <p class="detail-category">{current.category || "Illustration"}</p>
+    </div>
+
+    <div class="marquee-section">
+      <div class="marquee-wrap marquee-rtl">
+        <div class="marquee-track">
+          {others.map((item) => (
+            <a href={`/illustrations/${item.slug}`} class="marquee-item">
+              <img src={item.src} alt={item.alt} loading="lazy" />
+            </a>
+          ))}
+          {others.map((item) => (
+            <a href={`/illustrations/${item.slug}`} class="marquee-item" aria-hidden="true" tabindex="-1">
+              <img src={item.src} alt={item.alt} loading="lazy" />
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <div class="cta-section">
+      <h2 class="cta-heading">Like what you see?</h2>
+      <img src="/images/doodles/individual-doodle-2.png" alt="" class="cta-doodle-arrow" />
+      <p class="cta-subheading">contact me!</p>
+      <a href="mailto:shrutiada19@gmail.com" class="cta-email">shrutiada19@gmail.com</a>
+      <img src="/images/doodles/individual-doodle-1.png" alt="" class="cta-doodle-monster" />
+    </div>
+
+  </div>
+</BaseLayout>
+
+<style>
+  .illust-detail {
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .hero-wrap {
+    width: 100%;
+    height: 44vw;
+    overflow: hidden;
+  }
+
+  .hero-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+  }
+
+  .detail-info {
+    padding: 3vw 0;
+    text-align: center;
+  }
+
+  .detail-category {
+    font-family: "Sugarpie", cursive;
+    font-size: 2.3443vw;
+    font-weight: 400;
+    text-align: center;
+    line-height: 1.4;
+  }
+
+  .marquee-section {
+    padding: 2vw 0 4vw;
+  }
+
+  .marquee-wrap {
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .marquee-track {
+    display: flex;
+    gap: 1.757vw;
+    width: max-content;
+  }
+
+  .marquee-rtl .marquee-track {
+    animation: scroll-rtl 160s linear infinite;
+  }
+
+  .marquee-wrap:hover .marquee-track {
+    animation-play-state: paused;
+  }
+
+  .marquee-item {
+    flex-shrink: 0;
+    width: 32.5769vw;
+    display: block;
+    text-decoration: none;
+    cursor: pointer;
+    overflow: hidden;
+    border-radius: 2px;
+  }
+
+  .marquee-item img {
+    width: 100%;
+    height: 18.3162vw;
+    object-fit: cover;
+    transition: transform 0.5s;
+  }
+
+  .marquee-item:hover img {
+    transform: scale(1.03);
+  }
+
+  .cta-section {
+    position: relative;
+    padding: 4vw 0 6vw;
+    min-height: 57vw;
+    overflow: visible;
+  }
+
+  .cta-heading {
+    font-family: "NewUnderground", sans-serif;
+    font-size: 4.6886vw;
+    font-weight: 500;
+    line-height: 1.057;
+    text-align: center;
+  }
+
+  .cta-doodle-arrow {
+    position: absolute;
+    left: 6vw;
+    top: 5.8vw;
+    width: 30vw;
+    object-fit: contain;
+    pointer-events: none;
+
+  }
+
+  .cta-subheading {
+    position: relative;
+    font-family: "NewUnderground", sans-serif;
+    font-size: 4.6886vw;
+    font-weight: 500;
+    line-height: 1.057;
+    text-align: center;
+    margin-top: 12vw;
+  }
+
+  .cta-email {
+    position: relative;
+    display: block;
+    margin-top: 1vw;
+    font-family: "Sugarpie", cursive;
+    font-size: 3.5139vw;
+    font-weight: 400;
+    text-decoration: none;
+    color: inherit;
+    text-align: center;
+    transition: opacity 0.3s;
+  }
+
+  .cta-email:hover {
+    opacity: 0.7;
+  }
+
+  .cta-doodle-monster {
+    position: absolute;
+    right: -4vw;
+    top: 14vw;
+    width: 37vw;
+    object-fit: contain;
+    pointer-events: none;
+  }
+
+  @keyframes scroll-rtl {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+</style>

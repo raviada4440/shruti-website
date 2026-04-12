@@ -12,5 +12,6 @@
     "@astrojs/tailwind": "^6.0.2",
     "tailwindcss": "^3.4.17",
     "gsap": "^3.12.7"
-  }
+  },
+  "packageManager": "pnpm@10.22.0+sha256.053a8493e8e328a3c6d7ff5cb079bef28719152ccf831e4666b5c0332b77bb88"
 }

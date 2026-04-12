@@ -9,31 +9,72 @@ alwaysApply: true
 ## Tech Stack
 - **Astro 5** static site generator
 - **Tailwind CSS 3** for styling (config in `tailwind.config.mjs`)
-- **GSAP** for scroll-triggered animations
-- **Google Fonts**: Gilda Display (display), PT Serif (body), DM Sans (sans/UI)
+- Custom fonts: **Sugarpie** (hand-drawn body, 24–36px), **NewUnderground** (bold display headings, 57–64px)
+- Crumpled paper background texture
 
 ## Design System
-- Warm cream/beige backgrounds (`cream-100` through `cream-400`)
-- Gold/amber accents for buttons, dividers, hover states (`warmgold-300` through `warmgold-700`)
-- Charcoal for text (`charcoal-700` through `charcoal-900`)
-- Sage green as optional accent (`sage-300` through `sage-800`)
+- Crumpled paper texture backgrounds (applied via `global.css`)
+- Black text on paper texture — no color palette needed
+- Hand-drawn doodle characters placed at specific positions on each page
+- Fonts convey the entire personality — Sugarpie for body, NewUnderground for headings
 
 ## Architecture
-- Single-page portfolio with section-based navigation (#illustrations, #projects, #services, #about, #contact)
-- Components are in `src/components/` — each is a self-contained `.astro` file
-- Layout (header, footer, nav, loader) is in `src/layouts/BaseLayout.astro`
-- All artwork images live in `public/images/portfolio/`
-- Image arrays in components define which images appear where
+- Multi-page portfolio with dedicated routes (not single-page anchors)
+- Header nav links to `/illustrations`, `/works`, `/services`, `/about`
+- Portfolio data lives in `src/data/portfolio.ts` — illustrations and works arrays
+- Dynamic routes: `src/pages/illustrations/[slug].astro` and `src/pages/works/[slug].astro`
+- Gallery pages: `src/pages/illustrations.astro` and `src/pages/works.astro`
+- All artwork images in `public/images/portfolio/`
+- Works project images in `public/images/works/[project-slug]/`
+- Doodle images in `public/images/doodles/`
+
+## Figma Conversion — Critical Rules
+
+### Sizing: Always Use `vw` Units
+- **NEVER use fixed `px` values** for font-size, padding, margin, width, or height
+- Convert Figma px to vw: `px / 1365 * 100 = vw` (frame width is 1365px)
+- Common conversions: 64px = 4.6886vw, 57px = 4.1758vw, 32px = 2.3443vw, 24px = 1.7582vw, 36px = 2.6374vw
+- This ensures proportional scaling at any viewport width
+
+### Doodle Images: Render from Figma API
+- **NEVER guess CSS transforms** (rotate, scaleX, scaleY) for doodle orientation
+- Instead, render the specific Figma node as a PNG using the Figma render API (`/v1/images/{file}?ids=NODE_ID&format=png&scale=2`)
+- This bakes in all Figma transforms (rotation, flip) into the image itself
+- Save pre-rendered doodles to `public/images/doodles/`
+- If a doodle has excessive transparent padding, crop it programmatically (Python Pillow)
+
+### Text: Extract Exact Styles from Figma
+- Use `node.style.fontFamily`, `fontSize`, `fontWeight`, `textAlignHorizontal` from Figma API
+- Never guess font sizes — always derive from the cached Figma data in `scripts/figma-cache/all-pages.json`
+- Text should not have fixed `width` that causes premature wrapping — let it flow naturally
+
+### Layout Positioning
+- Use `position: absolute` with vw-based `left`/`top`/`right` for doodles and overlapping elements
+- Use CSS `columns` for masonry grids (no JS needed)
+- Marquee animations use `@keyframes` with `translateX(-50%)` and duplicated content for seamless loop
+- Marquee speed: currently 160s for gallery/detail pages, 180s for landing page
+
+### Figma Data Access
+- Cached Figma API data: `scripts/figma-cache/all-pages.json`
+- Contains all pages: landing (0:1), gallery (2:8), individual view (3:47), case study (3:76), services (3:132), about (4:183)
+- Each node has `absoluteBoundingBox` (x, y, width, height), `style` (fonts), `fills` (imageRef)
+- Figma file key: `fzcw08xG5ByHbIZnnxR2GY`
+- Figma token: stored in scripts, use for API calls
+
+## Works Data Model
+Works use a flexible `sections` array — each section has a `type` ("full-width", "marquee", "masonry"), optional `label`, and `images` array. This allows each project to define its own unique layout.
 
 ## Key Patterns
-- Use Tailwind utility classes (responsive: `md:`, `lg:` prefixes)
-- Hover overlays use `.card-hover` and `.card-overlay` classes from `global.css`
-- Section dividers use diamond ornaments (`&#x2726;`) with `.section-divider` class
-- Buttons use `.btn-primary` or `.btn-outline` classes
-- GSAP ScrollTrigger animations are defined in `src/pages/index.astro`
+- Header component in `src/components/Header.astro` — shared across all pages
+- Base layout in `src/layouts/BaseLayout.astro` — includes header, lightbox, mobile menu
+- Marquee: duplicate the image set for seamless infinite scroll, pause on hover
+- CTA sections: "Like what you see?" + doodles pattern reused on illustration and works detail pages
+- All new images go in `public/images/` (referenced as `/images/...`)
+- Navigation uses proper page routes, not anchor links
 
 ## When Editing
-- Keep the warm, elegant aesthetic consistent across changes
-- All new images should go in `public/images/` (referenced as `/images/...`)
-- When adding sections, wrap in `<section>` with an id for navigation
-- Test at mobile (375px), tablet (768px), and desktop (1440px) widths
+- Keep the hand-drawn, playful aesthetic consistent
+- All values in `vw` — never introduce fixed `px` sizing
+- When adding doodles, always render from Figma API (don't apply CSS transforms)
+- Test responsiveness by resizing viewport — everything should scale proportionally
+- Alternating left/right alignment pattern used on services page

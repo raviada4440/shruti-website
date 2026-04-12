@@ -3,113 +3,271 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
 <BaseLayout title="Services — Shruti Ada">
-  <div class="max-w-[1366px] mx-auto px-6 md:px-12 py-8 md:py-12">
-    <!-- Header -->
-    <div class="text-center mb-6">
-      <h1 class="text-5xl md:text-6xl lg:text-[96px] leading-[1.05]">Services</h1>
-      <p class="font-body text-lg md:text-xl mt-3">curious as to what i can offer you?</p>
-      <p class="font-body text-lg md:text-xl">
-        well its branding, illustrations & iconography, social media content, and website design
-      </p>
+  <div class="services-page">
+
+    <div class="services-hero">
+      <h1 class="services-title">Services</h1>
+      <p class="services-subtitle">curious as to what i can offer you?</p>
+      <p class="services-subtitle">well its branding, illustrations & iconography, social media content, and website design</p>
     </div>
 
     <!-- Branding -->
-    <section class="py-12 md:py-16 border-t border-black/10">
-      <h2 class="text-4xl md:text-5xl lg:text-[64px] leading-[1.05] mb-6">branding</h2>
-      <p class="font-body text-base md:text-lg italic mb-4">
-        Let's make your business unforgettable. (In the good way.)
-      </p>
-      <p class="font-body text-base md:text-lg max-w-4xl leading-relaxed">
-        You know that feeling when a brand just gets it? The logo, the colors, the whole vibe feels so right it's almost annoying? Yeah, that's what we're going for. Through research, art direction, and an illustrator's brain that never really clocks out, I build brand identities that turn heads and actually reflect who you are. No cookie-cutter anything. Just your brand, but make it iconic.
-      </p>
-      <p class="font-body text-base md:text-lg mt-4 italic">
-        Includes: Art Direction, Market Research, Logo Design & Brand Identity
-      </p>
+    <section class="service-block service-left">
+      <h2 class="service-heading">branding</h2>
+      <div class="service-body">
+        <p class="service-text align-left">Let's make your business unforgettable. (In the good way.)
+
+You know that feeling when a brand just gets it? The logo, the colors, the whole vibe feels so right it's almost annoying? Yeah, that's what we're going for. Through research, art direction, and an illustrator's brain that never really clocks out, I build brand identities that turn heads and actually reflect who you are. No cookie-cutter anything. Just your brand, but make it iconic.
+
+Includes: Art Direction, Market Research, Logo Design & Brand Identity</p>
+      </div>
+      <img src="/images/doodles/services-doodle-1.png" alt="" class="service-doodle doodle-branding" />
     </section>
 
     <!-- Illustrations & Iconography -->
-    <section class="py-12 md:py-16 border-t border-black/10 flex flex-col md:flex-row gap-8 md:gap-16">
-      <div class="flex-1">
-        <h2 class="text-4xl md:text-5xl lg:text-[64px] leading-[1.05] mb-6">
-          illustrations<br />and iconography
-        </h2>
-        <p class="font-body text-base md:text-lg italic mb-4">
-          This is my love language. Seriously.
-        </p>
-        <p class="font-body text-base md:text-lg max-w-4xl leading-relaxed">
-          Ask me to draw something and watch my eyes light up like a kid on Christmas. As an illustrator first, this is where I'm fully in my element. editorial pieces that make people stop and stare, custom icon sets that give your brand its own visual personality, and artwork that couldn't have come from anyone else. Stock illustrations? We don't know her.
-        </p>
-        <p class="font-body text-base md:text-lg mt-4 italic">
-          Includes: Editorial Illustration, Custom Iconography, Commercial & Conceptual Artwork
-        </p>
+    <section class="service-block service-right">
+      <h2 class="service-heading align-right">+illustrations
++=and Iconography</h2>
+      <div class="service-body">
+        <p class="service-text align-right">This is my love language. Seriously.
+
+Ask me to draw something and watch my eyes light up like a kid on Christmas. As an illustrator first, this is where I'm fully in my element, editorial pieces that make people stop and stare, custom icon sets that give your brand its own visual personality, and artwork that couldn't have come from anyone else. Stock illustrations? We don't know her.
+
+Includes: Editorial Illustration, Custom Iconography, Commercial & Conceptual Artwork</p>
       </div>
-      <div class="flex-shrink-0 self-center">
-        <img src="/images/doodles/services-1.png" alt="" class="w-32 md:w-48" />
-      </div>
+      <img src="/images/doodles/services-doodle-2.png" alt="" class="service-doodle doodle-illustration" />
     </section>
 
     <!-- Social Media Content -->
-    <section class="py-12 md:py-16 border-t border-black/10">
-      <h2 class="text-4xl md:text-5xl lg:text-[64px] leading-[1.05] mb-6">
-        social media<br />content
-      </h2>
-      <p class="font-body text-base md:text-lg italic mb-4">
-        A website so you,(your mom) will finally understand what you do.
-      </p>
-      <p class="font-body text-base md:text-lg max-w-4xl leading-relaxed">
-        No more "so what is it exactly that you make?" Your website should feel like walking into your world, not borrowing someone else's template and hoping for the best. I design UX experiences that are clean, beautiful, and easy to navigate because looking good and making sense shouldn't be mutually exclusive. And yes, the illustrator brain makes everything more interesting. You're welcome.
-      </p>
-      <p class="font-body text-base md:text-lg mt-4 italic">
-        Includes: UI Design, Layout & Visual Hierarchy, Brand-Aligned Web Experience
-      </p>
+    <section class="service-block service-left">
+      <h2 class="service-heading">social media content</h2>
+      <div class="service-body">
+        <p class="service-text align-left">A website so you,(your mom) will finally understand what you do.
+
+No more "so what is it exactly that you make?" Your website should feel like walking into your world, not borrowing someone else's template and hoping for the best. I design UI experiences that are clean, beautiful, and easy to navigate because looking good and making sense shouldn't be mutually exclusive. And yes, the illustrator brain makes everything more interesting. You're welcome.
+
+Includes: UI Design, Layout & Visual Hierarchy, Brand-Aligned Web Experience</p>
+      </div>
     </section>
 
     <!-- Website Design -->
-    <section class="py-12 md:py-16 border-t border-black/10 flex flex-col md:flex-row gap-8 md:gap-16">
-      <div class="flex-1">
-        <h2 class="text-4xl md:text-5xl lg:text-[64px] leading-[1.05] mb-6">
-          website<br />design
-        </h2>
-        <p class="font-body text-base md:text-lg max-w-4xl leading-relaxed">
-          Because "I'll just post something later" is not a strategy. We've all been there. Staring at a blank grid wondering why nothing looks right. That's where I come in. From posts and story graphics to event invites and email headers, I create content that's cohesive, on-brand, and way too good to scroll past. Your audience will think you have a whole creative team. It'll be our little secret.
-        </p>
-        <p class="font-body text-base md:text-lg mt-4 italic">
-          Includes: Social Media Graphics, Post Templates, Digital Invitations, Email Headers & Banners
-        </p>
-      </div>
-      <div class="flex-shrink-0 self-center">
-        <img src="/images/doodles/services-2.png" alt="" class="w-32 md:w-48" />
+    <section class="service-block service-right">
+      <h2 class="service-heading align-right">website design</h2>
+      <div class="service-body">
+        <p class="service-text align-right">Because "I'll just post something later" is not a strategy.
+
+We've all been there. Staring at a blank grid wondering why nothing looks right. That's where I come in. From posts and story graphics to event invites and email headers, I create content that's cohesive, on-brand, and way too good to scroll past. Your audience will think you have a whole creative team. It'll be our little secret.
+
+Includes: Social Media Graphics, Post Templates, Digital Invitations, Email Headers & Banners</p>
       </div>
     </section>
 
-    <!-- CTA -->
-    <section class="py-16 md:py-24 text-center border-t border-black/10">
-      <h2 class="text-5xl md:text-6xl lg:text-[96px] leading-[1.05]">Interested?</h2>
-      <p class="font-body text-xl md:text-[27px] mt-4">thank god.</p>
-      <div class="mt-8">
-        <p class="font-body text-xl md:text-[27px]">email me here:</p>
-        <a href="mailto:shrutiada19@gmail.com" class="font-body text-2xl md:text-4xl hover:opacity-60 transition-opacity underline">
-          shrutiada19@gmail.com
-        </a>
+    <!-- Interested CTA -->
+    <section class="interested-section">
+      <div class="interested-text">
+        <h2 class="interested-heading">Interested?</h2>
+        <p class="interested-sub">thank god.</p>
+        <p class="interested-label">email me here:</p>
+        <a href="mailto:shrutiada19@gmail.com" class="interested-email">shrutiada19@gmail.com</a>
+      </div>
+      <img src="/images/doodles/services-doodle-3.png" alt="" class="interested-doodle" />
+    </section>
+
+    <!-- Bottom scroll section -->
+    <section class="bottom-section">
+      <h2 class="bottom-heading">if you wanna scroll</h2>
+      <div class="bottom-links">
+        <a href="https://www.instagram.com" target="_blank" rel="noopener" class="bottom-link">instagram</a>
+        <a href="https://www.linkedin.com" target="_blank" rel="noopener" class="bottom-link">linkedin</a>
       </div>
     </section>
 
-    <!-- Footer links -->
-    <section class="py-12 text-center border-t border-black/10">
-      <h2 class="text-4xl md:text-5xl lg:text-[64px] leading-[1.05] mb-8">
-        if you wanna scroll
-      </h2>
-      <div class="flex flex-col items-center gap-4">
-        <a href="https://www.instagram.com" target="_blank" rel="noopener" class="font-body text-2xl md:text-4xl hover:opacity-60 transition-opacity">
-          instagram
-        </a>
-        <a href="https://www.linkedin.com" target="_blank" rel="noopener" class="font-body text-2xl md:text-4xl hover:opacity-60 transition-opacity">
-          linkedin
-        </a>
-      </div>
-      <div class="mt-12">
-        <img src="/images/doodles/stickfigure-1.png" alt="" class="w-32 mx-auto" />
-      </div>
-    </section>
   </div>
 </BaseLayout>
+
+<style>
+  .services-page {
+    width: 100%;
+    overflow: hidden;
+  }
+
+  /* Hero */
+  .services-hero {
+    padding: 6vw 0 4vw;
+    text-align: center;
+  }
+
+  .services-title {
+    font-family: "NewUnderground", sans-serif;
+    font-size: 4.6886vw;
+    font-weight: 500;
+    line-height: 1.057;
+  }
+
+  .services-subtitle {
+    font-family: "Sugarpie", cursive;
+    font-size: 1.7582vw;
+    font-weight: 400;
+    line-height: 1.4;
+    margin-top: 1vw;
+  }
+
+  /* Service blocks */
+  .service-block {
+    position: relative;
+    padding: 4vw 4.25vw;
+  }
+
+  .service-heading {
+    font-family: "NewUnderground", sans-serif;
+    font-size: 4.6886vw;
+    font-weight: 500;
+    line-height: 1.057;
+    white-space: pre-line;
+  }
+
+  .service-left .service-heading {
+    text-align: left;
+  }
+
+  .service-right .service-heading {
+    text-align: right;
+  }
+
+  .service-body {
+    margin-top: 2vw;
+  }
+
+  .service-text {
+    font-family: "Sugarpie", cursive;
+    font-size: 1.7582vw;
+    font-weight: 400;
+    line-height: 1.5;
+    white-space: pre-line;
+    max-width: 91.7vw;
+  }
+
+  .align-left {
+    text-align: left;
+  }
+
+  .align-right {
+    text-align: right;
+  }
+
+  /* Doodles */
+  .service-doodle {
+    position: absolute;
+    object-fit: contain;
+    pointer-events: none;
+  }
+
+  .doodle-branding {
+    left: 3.5vw;
+    bottom: -18vw;
+    width: 22vw;
+  }
+
+  .doodle-illustration {
+    right: 3vw;
+    bottom: -20vw;
+    width: 24vw;
+  }
+
+  /* Interested CTA */
+  .interested-section {
+    position: relative;
+    padding: 8vw 4.25vw 6vw;
+    min-height: 50vw;
+  }
+
+  .interested-text {
+    position: relative;
+    z-index: 1;
+  }
+
+  .interested-heading {
+    font-family: "NewUnderground", sans-serif;
+    font-size: 4.6886vw;
+    font-weight: 500;
+    line-height: 1.057;
+    text-align: center;
+  }
+
+  .interested-sub {
+    font-family: "Sugarpie", cursive;
+    font-size: 1.7582vw;
+    font-weight: 400;
+    line-height: 1.4;
+    text-align: center;
+    margin-top: 2vw;
+  }
+
+  .interested-label {
+    font-family: "Sugarpie", cursive;
+    font-size: 1.7582vw;
+    font-weight: 400;
+    line-height: 1.4;
+    text-align: center;
+    margin-top: 6vw;
+  }
+
+  .interested-email {
+    display: block;
+    font-family: "Sugarpie", cursive;
+    font-size: 2.6374vw;
+    font-weight: 400;
+    text-align: center;
+    text-decoration: none;
+    color: inherit;
+    margin-top: 0.5vw;
+    transition: opacity 0.3s;
+  }
+
+  .interested-email:hover {
+    opacity: 0.7;
+  }
+
+  .interested-doodle {
+    position: absolute;
+    right: -10vw;
+    top: 5vw;
+    width: 50.9vw;
+    object-fit: contain;
+    pointer-events: none;
+  }
+
+  /* Bottom section */
+  .bottom-section {
+    padding: 6vw 0 8vw;
+    text-align: center;
+  }
+
+  .bottom-heading {
+    font-family: "NewUnderground", sans-serif;
+    font-size: 4.6886vw;
+    font-weight: 500;
+    line-height: 1.057;
+  }
+
+  .bottom-links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5vw;
+    margin-top: 4vw;
+  }
+
+  .bottom-link {
+    font-family: "Sugarpie", cursive;
+    font-size: 2.6374vw;
+    font-weight: 400;
+    text-decoration: none;
+    color: inherit;
+    transition: opacity 0.3s;
+  }
+
+  .bottom-link:hover {
+    opacity: 0.7;
+  }
+</style>

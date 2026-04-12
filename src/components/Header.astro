@@ -1,0 +1,90 @@
+---
+const navLinks = [
+  { href: "/illustrations", label: "illustration" },
+  { href: "/works", label: "works" },
+  { href: "/services", label: "services" },
+  { href: "/about", label: "about" },
+];
+---
+
+<header class="fixed top-0 left-0 right-0 z-50 px-6 md:px-12 py-5">
+  <nav class="max-w-[1366px] mx-auto hidden md:flex items-center justify-between">
+    <div class="flex items-center gap-12 lg:gap-20">
+      {navLinks.slice(0, 2).map((link) => (
+        <a
+          href={link.href}
+          class="font-body text-lg lg:text-xl text-black/80 hover:text-black transition-colors duration-300"
+        >
+          {link.label}
+        </a>
+      ))}
+    </div>
+    <a href="/" class="nav-logo">
+      <span class="nav-logo-line">Shruti</span>
+      <span class="nav-logo-line">Ada</span>
+    </a>
+    <div class="flex items-center gap-12 lg:gap-20">
+      {navLinks.slice(2).map((link) => (
+        <a
+          href={link.href}
+          class="font-body text-lg lg:text-xl text-black/80 hover:text-black transition-colors duration-300"
+        >
+          {link.label}
+        </a>
+      ))}
+    </div>
+  </nav>
+
+  <button
+    id="menu-toggle"
+    class="fixed top-5 right-6 z-[60] flex flex-col gap-[5px] md:hidden"
+    aria-label="Toggle menu"
+  >
+    <span class="block w-6 h-[2px] bg-black transition-all duration-300 origin-center"></span>
+    <span class="block w-6 h-[2px] bg-black transition-all duration-300"></span>
+    <span class="block w-6 h-[2px] bg-black transition-all duration-300 origin-center"></span>
+  </button>
+</header>
+
+<nav
+  id="mobile-nav"
+  class="fixed inset-0 z-50 bg-[#e8e4df] flex items-center justify-center opacity-0 pointer-events-none transition-all duration-500 md:hidden"
+>
+  <ul class="text-center space-y-8">
+    <li>
+      <a href="/" class="nav-logo inline-block">
+        <span class="nav-logo-line" style="font-size: 2rem;">Shruti</span>
+        <span class="nav-logo-line" style="font-size: 2rem;">Ada</span>
+      </a>
+    </li>
+    {navLinks.map((link) => (
+      <li>
+        <a
+          href={link.href}
+          class="font-body text-3xl text-black hover:opacity-60 transition-opacity"
+        >
+          {link.label}
+        </a>
+      </li>
+    ))}
+  </ul>
+</nav>
+
+<style>
+  .nav-logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    line-height: 1.1;
+    text-decoration: none;
+    transition: opacity 0.3s;
+  }
+  .nav-logo:hover { opacity: 0.6; }
+  .nav-logo-line {
+    display: block;
+    font-family: "NewUnderground", sans-serif;
+    font-size: 1.3vw;
+    font-weight: 400;
+    color: black;
+  }
+</style>

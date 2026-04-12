@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import Header from "../components/Header.astro";
 
 interface Props {
   title?: string;
@@ -8,15 +9,8 @@ interface Props {
 
 const {
   title = "Shruti Ada — Illustrator & Designer",
-  description = "Portfolio of Shruti Ada — illustrator, graphic designer, and creative problem solver.",
+  description = "Portfolio of Shruti Ada — illustrator, graphic designer, and visual storyteller.",
 } = Astro.props;
-
-const navLinks = [
-  { href: "/", label: "illustration" },
-  { href: "/gallery", label: "projects" },
-  { href: "/services", label: "services" },
-  { href: "/about", label: "about" },
-];
 ---
 
 <!doctype html>
@@ -29,45 +23,9 @@ const navLinks = [
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   </head>
   <body>
-    <header class="fixed top-0 left-0 right-0 z-50 px-6 md:px-12 py-5">
-      <nav class="max-w-[1366px] mx-auto flex items-center justify-between">
-        <div class="flex items-center gap-10 md:gap-16">
-          {navLinks.slice(0, 2).map((link) => (
-            <a href={link.href} class="font-body text-xl md:text-2xl text-black hover:opacity-60 transition-opacity">
-              {link.label}
-            </a>
-          ))}
-        </div>
-        <div class="flex items-center gap-10 md:gap-16">
-          {navLinks.slice(2).map((link) => (
-            <a href={link.href} class="font-body text-xl md:text-2xl text-black hover:opacity-60 transition-opacity">
-              {link.label}
-            </a>
-          ))}
-        </div>
-      </nav>
+    <Header />
 
-      <!-- Mobile hamburger -->
-      <button id="menu-toggle" class="fixed top-5 right-6 z-[60] flex flex-col gap-[5px] md:hidden" aria-label="Toggle menu">
-        <span class="block w-6 h-[2px] bg-black transition-all duration-300 origin-center"></span>
-        <span class="block w-6 h-[2px] bg-black transition-all duration-300"></span>
-        <span class="block w-6 h-[2px] bg-black transition-all duration-300 origin-center"></span>
-      </button>
-    </header>
-
-    <nav id="mobile-nav" class="fixed inset-0 z-50 bg-[#e8e4df] flex items-center justify-center opacity-0 pointer-events-none transition-all duration-500 md:hidden">
-      <ul class="text-center space-y-8">
-        {navLinks.map((link) => (
-          <li>
-            <a href={link.href} class="font-body text-3xl text-black hover:opacity-60 transition-opacity">
-              {link.label}
-            </a>
-          </li>
-        ))}
-      </ul>
-    </nav>
-
-    <main class="pt-20">
+    <main>
       <slot />
     </main>
 
@@ -75,13 +33,19 @@ const navLinks = [
     <div id="lightbox" class="lightbox">
       <div class="lightbox-backdrop"></div>
       <button id="lightbox-close" class="lightbox-close" aria-label="Close">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12"/></svg>
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+          <path d="M6 18L18 6M6 6l12 12" />
+        </svg>
       </button>
       <button id="lightbox-prev" class="lightbox-nav lightbox-prev-btn" aria-label="Previous image">
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7"/></svg>
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path d="M15 19l-7-7 7-7" />
+        </svg>
       </button>
       <button id="lightbox-next" class="lightbox-nav lightbox-next-btn" aria-label="Next image">
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg>
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path d="M9 5l7 7-7 7" />
+        </svg>
       </button>
       <div class="lightbox-img-wrapper">
         <img id="lightbox-img" src="" alt="" />
@@ -89,6 +53,7 @@ const navLinks = [
     </div>
 
     <script>
+      // Mobile nav
       const toggle = document.getElementById("menu-toggle");
       const mobileNav = document.getElementById("mobile-nav");
       if (toggle && mobileNav) {
@@ -111,7 +76,7 @@ const navLinks = [
           link.addEventListener("click", () => {
             mobileNav.style.opacity = "0";
             mobileNav.style.pointerEvents = "none";
-            const spans = toggle.querySelectorAll("span");
+            const spans = toggle!.querySelectorAll("span");
             spans[0].style.transform = "";
             spans[1].style.opacity = "1";
             spans[2].style.transform = "";
@@ -122,7 +87,9 @@ const navLinks = [
       // Lightbox
       const lightbox = document.getElementById("lightbox");
       const lightboxImg = document.getElementById("lightbox-img") as HTMLImageElement;
-      const triggers = Array.from(document.querySelectorAll<HTMLElement>("[data-lightbox]"));
+      const triggers = Array.from(
+        document.querySelectorAll<HTMLElement>("[data-lightbox]")
+      );
       let currentIndex = 0;
 
       function openLightbox(index: number) {
@@ -133,23 +100,39 @@ const navLinks = [
         lightbox!.classList.add("is-open");
         document.body.style.overflow = "hidden";
       }
+
       function closeLightbox() {
         lightbox!.classList.remove("is-open");
         document.body.style.overflow = "";
       }
+
       function navigate(dir: number) {
         currentIndex = (currentIndex + dir + triggers.length) % triggers.length;
         const el = triggers[currentIndex];
         lightboxImg.src = el.dataset.lightboxSrc || "";
         lightboxImg.alt = el.dataset.lightboxAlt || "";
       }
+
       triggers.forEach((el, i) => {
-        el.addEventListener("click", (e) => { e.preventDefault(); openLightbox(i); });
+        el.addEventListener("click", (e) => {
+          e.preventDefault();
+          openLightbox(i);
+        });
       });
-      document.getElementById("lightbox-close")?.addEventListener("click", closeLightbox);
-      document.querySelector(".lightbox-backdrop")?.addEventListener("click", closeLightbox);
-      document.getElementById("lightbox-prev")?.addEventListener("click", () => navigate(-1));
-      document.getElementById("lightbox-next")?.addEventListener("click", () => navigate(1));
+
+      document
+        .getElementById("lightbox-close")
+        ?.addEventListener("click", closeLightbox);
+      document
+        .querySelector(".lightbox-backdrop")
+        ?.addEventListener("click", closeLightbox);
+      document
+        .getElementById("lightbox-prev")
+        ?.addEventListener("click", () => navigate(-1));
+      document
+        .getElementById("lightbox-next")
+        ?.addEventListener("click", () => navigate(1));
+
       document.addEventListener("keydown", (e) => {
         if (!lightbox?.classList.contains("is-open")) return;
         if (e.key === "Escape") closeLightbox();

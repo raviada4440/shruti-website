@@ -1,0 +1,142 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { illustrations } from "../data/portfolio";
+---
+
+<BaseLayout title="Illustrations — Shruti Ada">
+  <div class="gallery-page">
+
+    <h1 class="gallery-title">Illustrations</h1>
+    <div class="gallery-doodle-wrap">
+      <img src="/images/doodles/gallery-doodle.png" alt="" class="gallery-doodle" />
+    </div>
+
+    <div class="marquee-wrap marquee-rtl">
+      <div class="marquee-track">
+        {illustrations.map((item) => (
+          <a href={`/illustrations/${item.slug}`} class="marquee-item">
+            <img src={item.src} alt={item.alt} loading="lazy" />
+          </a>
+        ))}
+        {illustrations.map((item) => (
+          <a href={`/illustrations/${item.slug}`} class="marquee-item" aria-hidden="true" tabindex="-1">
+            <img src={item.src} alt={item.alt} loading="lazy" />
+          </a>
+        ))}
+      </div>
+    </div>
+
+    <div class="marquee-wrap marquee-ltr">
+      <div class="marquee-track">
+        {illustrations.map((item) => (
+          <a href={`/illustrations/${item.slug}`} class="marquee-item">
+            <img src={item.src} alt={item.alt} loading="lazy" />
+          </a>
+        ))}
+        {illustrations.map((item) => (
+          <a href={`/illustrations/${item.slug}`} class="marquee-item" aria-hidden="true" tabindex="-1">
+            <img src={item.src} alt={item.alt} loading="lazy" />
+          </a>
+        ))}
+      </div>
+    </div>
+
+    <div class="marquee-wrap marquee-rtl">
+      <div class="marquee-track">
+        {illustrations.map((item) => (
+          <a href={`/illustrations/${item.slug}`} class="marquee-item">
+            <img src={item.src} alt={item.alt} loading="lazy" />
+          </a>
+        ))}
+        {illustrations.map((item) => (
+          <a href={`/illustrations/${item.slug}`} class="marquee-item" aria-hidden="true" tabindex="-1">
+            <img src={item.src} alt={item.alt} loading="lazy" />
+          </a>
+        ))}
+      </div>
+    </div>
+
+  </div>
+</BaseLayout>
+
+<style>
+  .gallery-page {
+    width: 100%;
+    padding-top: 6vw;
+    overflow: hidden;
+  }
+
+  .gallery-title {
+    font-family: "NewUnderground", sans-serif;
+    font-size: 4.6886vw;
+    font-weight: 500;
+    line-height: 1.057;
+    text-align: center;
+  }
+
+  .gallery-doodle-wrap {
+    margin-top: 1.5vw;
+    margin-bottom: 4vw;
+    padding-left: 6vw;
+  }
+
+  .gallery-doodle {
+    width: 10vw;
+    object-fit: contain;
+  }
+
+  .marquee-wrap {
+    width: 100%;
+    overflow: hidden;
+    margin-bottom: 2vw;
+  }
+
+  .marquee-track {
+    display: flex;
+    gap: 1.7570vw;
+    width: max-content;
+  }
+
+  .marquee-rtl .marquee-track {
+    animation: scroll-rtl 160s linear infinite;
+  }
+
+  .marquee-ltr .marquee-track {
+    animation: scroll-ltr 160s linear infinite;
+  }
+
+  .marquee-wrap:hover .marquee-track {
+    animation-play-state: paused;
+  }
+
+  .marquee-item {
+    flex-shrink: 0;
+    width: 32.5769vw;
+    display: block;
+    text-decoration: none;
+    cursor: pointer;
+    overflow: hidden;
+    border-radius: 2px;
+  }
+
+  .marquee-item img {
+    width: 100%;
+    height: 18.3162vw;
+    object-fit: cover;
+    transition: transform 0.5s;
+  }
+
+  .marquee-item:hover img {
+    transform: scale(1.03);
+  }
+
+  @keyframes scroll-rtl {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  @keyframes scroll-ltr {
+    0% { transform: translateX(-50%); }
+    100% { transform: translateX(0); }
+  }
+</style>

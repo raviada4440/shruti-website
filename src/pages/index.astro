@@ -1,147 +1,316 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-
-const illustrations = [
-  { src: "/images/portfolio/mansion-scene-color.jpg", alt: "Monster House" },
-  { src: "/images/portfolio/forest-scene.jpg", alt: "Forest Scene" },
-  { src: "/images/portfolio/outside-scene.jpg", alt: "Outside Scene" },
-  { src: "/images/portfolio/interior-scene.jpg", alt: "Interior Scene" },
-];
-
-const projects = [
-  { src: "/images/portfolio/mansion-scene-color.jpg", alt: "Monster House" },
-  { src: "/images/portfolio/forest-scene.jpg", alt: "Forest Scene" },
-  { src: "/images/portfolio/landscape.jpg", alt: "Landscape" },
-  { src: "/images/portfolio/kotn-bg.jpg", alt: "KOTN Production" },
-];
+import { illustrations, works } from "../data/portfolio";
 ---
 
 <BaseLayout>
-  <!-- Hero -->
-  <section class="min-h-[90vh] flex flex-col justify-center max-w-[1366px] mx-auto px-6 md:px-12 relative">
-    <div class="flex flex-col md:flex-row items-start gap-8 md:gap-16">
-      <div class="flex-1">
-        <h1 class="text-5xl sm:text-6xl md:text-7xl lg:text-[96px] leading-[1.05] tracking-tight">
-          Welcome to the<br />inside of my brain
-        </h1>
-        <p class="font-body text-xl md:text-2xl mt-6 max-w-xl">
-          (My name is Shruti Ada and I'm an illustrator + Graphic Designer)
-        </p>
-      </div>
-      <div class="flex-shrink-0 w-48 md:w-72 self-center md:self-start">
-        <img src="/images/doodles/creature-1.png" alt="" class="w-full" />
-      </div>
-    </div>
-  </section>
+  <div class="figma-canvas">
 
-  <!-- Manifesto -->
-  <section class="py-16 md:py-24 max-w-[1366px] mx-auto px-6 md:px-12">
-    <h2 class="text-4xl sm:text-5xl md:text-6xl lg:text-[96px] leading-[1.05] tracking-tight text-center max-w-5xl mx-auto">
-      Every project gets my whole heart, not just my hands
-    </h2>
-    <p class="font-body text-xl md:text-[27px] text-center mt-8 max-w-2xl mx-auto">
-      My works are my babies, I raise them from the ground up
-    </p>
-  </section>
-
-  <!-- Illustrations -->
-  <section class="py-16 md:py-20 max-w-[1366px] mx-auto px-6 md:px-12">
-    <h2 class="text-5xl md:text-6xl lg:text-[96px] leading-[1.05] tracking-tight text-center mb-4">
-      illustrations
-    </h2>
-    <p class="font-body text-xl md:text-[27px] text-center mb-10">
-      ( a plethora of illustrative art works here)
-    </p>
-
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
-      {illustrations.map((item) => (
-        <div
-          class="group relative overflow-hidden cursor-pointer"
-          data-lightbox
-          data-lightbox-src={item.src}
-          data-lightbox-alt={item.alt}
-        >
-          <img
-            src={item.src}
-            alt={item.alt}
-            class="w-full h-48 md:h-56 object-cover transition-transform duration-500 group-hover:scale-105"
-            loading="lazy"
-          />
-        </div>
-      ))}
+    {/* Doodle layer — absolute positioned at exact Figma coordinates */}
+    <div class="doodle-layer" aria-hidden="true">
+      <img src="/images/doodles/monster-eye.png" alt="" class="doodle" style="left:-2.8551%; top:1.6%; width:31.1848%; height:11.0934%;" />
+      <img src="/images/doodles/creature-spirals.png" alt="" class="doodle" style="left:58.2723%; top:11.8750%; width:41.7277%; height:14.8438%;" />
+      <img src="/images/doodles/hands-reaching.png" alt="" class="doodle" style="left:-0.7321%; top:32.9167%; width:36.0521%; height:12.8248%; transform: rotate(90deg);" />
+      <img src="/images/doodles/arrow-1-rendered.png" alt="" class="doodle" style="left:1.4641%; top:55.2344%; width:31.5448%; height:11.2214%;" />
+      <img src="/images/doodles/arrow-2-rendered.png" alt="" class="doodle" style="left:60.8346%; top:74.8698%; width:34.3711%; height:12.2268%;" />
     </div>
 
-    <div class="flex justify-between items-center mt-6">
-      <a href="/gallery" class="font-body text-xl md:text-[27px] hover:opacity-60 transition-opacity">view more</a>
-      <a href="/gallery" class="font-body text-xl md:text-[27px] hover:opacity-60 transition-opacity">learn more</a>
-    </div>
-  </section>
+    {/* ── Hero ── */}
+    <section class="f-section f-hero">
+      <h1 class="f-hero-heading">Welcome to the inside of my brain</h1>
+      <p class="f-hero-subtitle">(My name is Shruti Ada and I’m an illustrator + Graphic Designer)</p>
+    </section>
 
-  <!-- Projects -->
-  <section class="py-16 md:py-20 max-w-[1366px] mx-auto px-6 md:px-12">
-    <h2 class="text-5xl md:text-6xl lg:text-[96px] leading-[1.05] tracking-tight text-center mb-4">
-      projects
-    </h2>
-    <p class="font-body text-xl md:text-[27px] text-center mb-10">
-      ( a plethora of projects art works here)
-    </p>
+    {/* ── Manifesto ── */}
+    <section class="f-section f-manifesto">
+      <h2 class="f-manifesto-heading">Every project gets my whole heart, not just my hands</h2>
+      <p class="f-manifesto-subtitle">My works are my babies, I raise them from the ground up</p>
+    </section>
 
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
-      {projects.map((item) => (
-        <div
-          class="group relative overflow-hidden cursor-pointer"
-          data-lightbox
-          data-lightbox-src={item.src}
-          data-lightbox-alt={item.alt}
-        >
-          <img
-            src={item.src}
-            alt={item.alt}
-            class="w-full h-48 md:h-56 object-cover transition-transform duration-500 group-hover:scale-105"
-            loading="lazy"
-          />
-        </div>
-      ))}
-    </div>
+    {/* ── Illustrations ── */}
+    <section id="illustrations" class="f-section f-illustrations">
+      <h2 class="f-illust-title">illustrations</h2>
+      <p class="f-illust-sub">( a plethora of illustrative art works here)</p>
 
-    <div class="mt-6">
-      <a href="/gallery" class="font-body text-xl md:text-[27px] hover:opacity-60 transition-opacity">view more</a>
-    </div>
-  </section>
-
-  <!-- Say Hello -->
-  <section class="py-20 md:py-32 max-w-[1366px] mx-auto px-6 md:px-12">
-    <h2 class="text-5xl md:text-6xl lg:text-[96px] leading-[1.05] tracking-tight text-center">
-      Say Hello!
-    </h2>
-    <p class="font-body text-xl md:text-[27px] text-center mt-4">
-      I promise I dont bite.....maybe
-    </p>
-
-    <div class="flex flex-col md:flex-row items-center justify-between gap-12 mt-16">
-      <div>
-        <h3 class="text-3xl md:text-4xl lg:text-[64px] leading-[1.05]">
-          Lets collaborate<br />and have fun
-        </h3>
-        <div class="mt-8 space-y-2">
-          <p class="font-body text-xl md:text-[27px]">contact me</p>
-          <a href="mailto:shrutiada19@gmail.com" class="font-body text-xl md:text-[27px] hover:opacity-60 transition-opacity underline">
-            shrutiada19@gmail.com
-          </a>
+      <div class="marquee-wrap">
+        <div class="marquee-track">
+          {illustrations.map((item) => (
+            <a href={`/illustrations/${item.slug}`} class="marquee-item">
+              <img src={item.src} alt={item.alt} loading="lazy" />
+            </a>
+          ))}
+          {illustrations.map((item) => (
+            <a href={`/illustrations/${item.slug}`} class="marquee-item" aria-hidden="true" tabindex="-1">
+              <img src={item.src} alt={item.alt} loading="lazy" />
+            </a>
+          ))}
         </div>
       </div>
-      <div class="flex-shrink-0">
-        <img src="/images/doodles/stickfigure-1.png" alt="" class="w-40 md:w-56" />
-      </div>
-    </div>
 
-    <div class="flex flex-col md:flex-row items-center justify-between mt-16 pt-8 border-t border-black/10">
-      <a href="mailto:shrutiada19@gmail.com" class="font-body text-xl md:text-[27px] hover:opacity-60 transition-opacity">
-        Shrutiada19@gmail.com
-      </a>
-      <a href="https://www.instagram.com" target="_blank" rel="noopener" class="font-body text-xl md:text-[27px] hover:opacity-60 transition-opacity">
-        social media
-      </a>
-    </div>
-  </section>
+      <a href="/illustrations" class="f-link f-illust-view">view more</a>
+    </section>
+
+    {/* ── Projects ── */}
+    <section id="works" class="f-section f-projects">
+      <h2 class="f-proj-title">works</h2>
+      <p class="f-proj-sub">( a plethora of projects art works here)</p>
+
+      <div class="marquee-wrap">
+        <div class="marquee-track">
+          {works.map((item) => (
+            <a href={`/works/${item.slug}`} class="marquee-item">
+              <img src={item.src} alt={item.alt} loading="lazy" />
+            </a>
+          ))}
+          {works.map((item) => (
+            <a href={`/works/${item.slug}`} class="marquee-item" aria-hidden="true" tabindex="-1">
+              <img src={item.src} alt={item.alt} loading="lazy" />
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <a href="/works" class="f-link f-proj-view">view more</a>
+    </section>
+
+    {/* ── Footer ── */}
+    <section class="f-section f-footer">
+      <h2 class="f-say-hello">Say Hello!</h2>
+      <p class="f-promise">I promise I dont bite.....maybe</p>
+
+      <div class="f-footer-cols">
+        <h3 class="f-collab">Lets collaborate and have fun</h3>
+        <div class="f-contact-right">
+          <p class="f-contact-label">contact me</p>
+          <a href="mailto:shrutiada19@gmail.com" class="f-contact-email">shrutiada19@gmail.com</a>
+        </div>
+      </div>
+
+      <div class="f-footer-bar">
+        <a href="mailto:shrutiada19@gmail.com" class="f-bottom-email">Shrutiada19@gmail.com</a>
+        <a href="https://www.instagram.com" target="_blank" rel="noopener" class="f-social">social media</a>
+      </div>
+    </section>
+
+  </div>
 </BaseLayout>
+
+<style>
+  /*
+   * ALL values below come from Figma API (frame 1366x3840).
+   * Node positions are in px, converted to % of frame for responsiveness.
+   * Font sizes, line heights, letter spacing are EXACT from style object.
+   */
+
+  .figma-canvas {
+    position: relative;
+    width: 100%;
+    overflow: visible;
+  }
+
+  /* ── Doodle layer ── */
+  .doodle-layer {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    overflow: visible;
+  }
+  .doodle {
+    position: absolute;
+    pointer-events: none;
+    object-fit: contain;
+  }
+  .f-section {
+    position: relative;
+    z-index: 2;
+  }
+
+  /* ── Hero ── */
+  .f-hero {
+    padding-top: 22.5476vw;
+    padding-left: 8.9312vw;
+    padding-right: 13.9092vw;
+  }
+  .f-hero-heading {
+    font-family: "NewUnderground", sans-serif; font-size: 7.0278vw; font-weight: 500; line-height: 1.0570;
+    text-align: center;
+    width: 77.1596vw;
+    max-width: 100%;
+  }
+  .f-hero-subtitle {
+    font-family: "Sugarpie", cursive; font-size: 1.7570vw; font-weight: 400; line-height: 1.5010;
+    text-align: left;
+    margin-top: 4.1769vw;
+    padding-left: 15.5198vw;
+  }
+
+  /* ── Manifesto ── */
+  .f-manifesto {
+    padding-top: 35vw;
+    padding-left: 10.6881vw;
+    padding-right: 12.1523vw;
+  }
+  .f-manifesto-heading {
+    font-family: "NewUnderground", sans-serif; font-size: 7.0278vw; font-weight: 500; line-height: 1.0570;
+    text-align: center;
+    width: 77.1596vw;
+    max-width: 100%;
+  }
+  .f-manifesto-subtitle {
+    font-family: "Sugarpie", cursive; font-size: 1.9766vw; font-weight: 400; line-height: 1.5010;
+    text-align: left;
+    margin-top: 3vw;
+    padding-left: 12.6647vw;
+  }
+
+  /* ── Illustrations ── */
+  .f-illustrations {
+    padding-top: 23.0947vw;
+  }
+  .f-illust-title {
+    font-family: "NewUnderground", sans-serif; font-size: 7.0278vw; font-weight: 500; line-height: 1.0570;
+    text-align: center;
+  }
+  .f-illust-sub {
+    font-family: "Sugarpie", cursive; font-size: 1.9766vw; font-weight: 400; line-height: 1.5010;
+    text-align: center;
+    margin-top: 1.4296vw;
+  }
+  .f-illust-view {
+    font-family: "Sugarpie", cursive; font-size: 1.9766vw; font-weight: 400; line-height: 1.5010;
+    display: block;
+    margin-top: 1.5vw;
+    text-align: center;
+  }
+
+  /* ── Projects ── */
+  .f-projects {
+    padding-top: 22vw;
+  }
+  .f-proj-title {
+    font-family: "NewUnderground", sans-serif; font-size: 7.0278vw; font-weight: 500; line-height: 1.0570;
+    text-align: center;
+  }
+  .f-proj-sub {
+    font-family: "Sugarpie", cursive; font-size: 1.9766vw; font-weight: 400; line-height: 1.5010;
+    text-align: center;
+    margin-top: 1.4296vw;
+  }
+  .f-proj-view {
+    font-family: "Sugarpie", cursive; font-size: 1.9766vw; font-weight: 400; line-height: 1.5010;
+    display: block;
+    margin-top: 1.7570vw;
+    text-align: center;
+  }
+
+  /* ── Footer ── */
+  .f-footer {
+    padding-top: 20vw;
+    padding-left: 3.6603vw;
+    padding-right: 3.5871vw;
+    padding-bottom: 2.2309vw;
+  }
+  .f-say-hello {
+    font-family: "NewUnderground", sans-serif; font-size: 7.0278vw; font-weight: 500; line-height: 1.0570;
+    text-align: center;
+  }
+  .f-promise {
+    font-family: "Sugarpie", cursive; font-size: 1.9766vw; font-weight: 400; line-height: 1.5010;
+    text-align: center;
+    margin-top: 1.7224vw;
+  }
+  .f-footer-cols {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-top: 6.4768vw;
+  }
+  .f-collab {
+    font-family: "NewUnderground", sans-serif; font-size: 4.6852vw; font-weight: 500; line-height: 1.0570;
+    text-align: center;
+    width: 37.0425vw;
+  }
+  .f-contact-right {
+    text-align: right;
+  }
+  .f-contact-label {
+    font-family: "Sugarpie", cursive; font-size: 1.9766vw; font-weight: 400; line-height: 1.5010;
+  }
+  .f-contact-email {
+    font-family: "Sugarpie", cursive; font-size: 1.9766vw; font-weight: 400; line-height: 1.5010;
+    display: block;
+    margin-top: 2.8165vw;
+    opacity: 0.7;
+    transition: opacity 0.3s;
+  }
+  .f-contact-email:hover { opacity: 1; }
+  .f-footer-bar {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 18.8487vw;
+  }
+  .f-bottom-email {
+    font-family: "Sugarpie", cursive; font-size: 1.9766vw; font-weight: 400; line-height: 1.5010;
+    opacity: 0.6;
+    transition: opacity 0.3s;
+  }
+  .f-social {
+    font-family: "Sugarpie", cursive; font-size: 1.9766vw; font-weight: 400; line-height: 1.5010;
+    opacity: 0.6;
+    transition: opacity 0.3s;
+  }
+  .f-bottom-email:hover, .f-social:hover { opacity: 1; }
+
+  /* ── Links ── */
+  .f-link {
+    color: rgb(0,0,0);
+    text-decoration: none;
+    transition: opacity 0.3s;
+  }
+  .f-link:hover { opacity: 0.6; }
+
+  /* ── Marquee (scrolling image strips) ── */
+  .marquee-wrap {
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    overflow: hidden;
+    margin-top: 0.1811vw;
+  }
+  .marquee-track {
+    display: flex;
+    gap: 1.7570vw;
+    animation: marquee-scroll 180s linear infinite;
+    width: max-content;
+  }
+  .marquee-wrap:hover .marquee-track {
+    animation-play-state: paused;
+  }
+  .marquee-item {
+    flex-shrink: 0;
+    width: 33.3089vw;
+    cursor: pointer;
+  }
+  .marquee-item img {
+    width: 100%;
+    height: 18.7408vw;
+    object-fit: cover;
+    border-radius: 2px;
+    transition: transform 0.7s;
+  }
+  .marquee-item:hover img {
+    transform: scale(1.03);
+  }
+  @keyframes marquee-scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* ── Mobile ── */
+  @media (max-width: 768px) {
+    .f-footer-cols { flex-direction: column; gap: 3vw; }
+    .f-contact-right { text-align: left; }
+  }
+</style>
