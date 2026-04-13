@@ -11,7 +11,7 @@ import { illustrations, works } from "../data/portfolio";
       <img src="/images/doodles/monster-eye.png" alt="" class="doodle" style="left:-2.8551%; top:1.6%; width:31.1848%; height:11.0934%;" />
       <img src="/images/doodles/creature-spirals.png" alt="" class="doodle" style="left:58.2723%; top:11.8750%; width:41.7277%; height:14.8438%;" />
       <img src="/images/doodles/hands-reaching.png" alt="" class="doodle" style="left:-0.7321%; top:32.9167%; width:36.0521%; height:12.8248%; transform: rotate(90deg);" />
-      <img src="/images/doodles/arrow-1-rendered.png" alt="" class="doodle" style="left:1.4641%; top:55.2344%; width:31.5448%; height:11.2214%;" />
+      <img src="/images/doodles/arrow-1-rendered.png" alt="" class="doodle" style="left:1.4641%; top:49%; width:31.5448%; height:11.2214%;" />
       <img src="/images/doodles/arrow-2-rendered.png" alt="" class="doodle" style="left:60.8346%; top:74.8698%; width:34.3711%; height:12.2268%;" />
     </div>
 
@@ -73,6 +73,13 @@ import { illustrations, works } from "../data/portfolio";
       <a href="/works" class="f-link f-proj-view">view more</a>
     </section>
 
+    {/* ── Services teaser (mobile only) ── */}
+    <section class="f-section f-services-teaser">
+      <h2 class="f-services-teaser-heading">Here are the services I provide</h2>
+      <p class="f-services-teaser-body">branding, website design, illustrations & iconography, social media content</p>
+      <a href="/services" class="f-link f-services-teaser-link">learn more here</a>
+    </section>
+
     {/* ── Footer ── */}
     <section class="f-section f-footer">
       <h2 class="f-say-hello">Say Hello!</h2>
@@ -122,6 +129,7 @@ import { illustrations, works } from "../data/portfolio";
     position: absolute;
     pointer-events: none;
     object-fit: contain;
+    mix-blend-mode: multiply;
   }
   .f-section {
     position: relative;
@@ -308,9 +316,175 @@ import { illustrations, works } from "../data/portfolio";
     100% { transform: translateX(-50%); }
   }
 
-  /* ── Mobile ── */
+  /* ── Services teaser ── */
+  .f-services-teaser {
+    padding: 6vw 4vw;
+    text-align: center;
+  }
+  .f-services-teaser-heading {
+    font-family: "NewUnderground", sans-serif;
+    font-size: 4.6886vw;
+    font-weight: 500;
+    line-height: 1.057;
+  }
+  .f-services-teaser-body {
+    font-family: "Sugarpie", cursive;
+    font-size: 1.7582vw;
+    font-weight: 400;
+    line-height: 1.5;
+    margin-top: 2vw;
+  }
+  .f-services-teaser-link {
+    font-family: "Sugarpie", cursive;
+    font-size: 1.7582vw;
+    display: block;
+    margin-top: 1.5vw;
+    color: inherit;
+    text-decoration: none;
+    transition: opacity 0.3s;
+  }
+  .f-services-teaser-link:hover {
+    opacity: 0.6;
+  }
+
+  /* ── Mobile (393px frame → vw = px / 393 * 100) ── */
   @media (max-width: 768px) {
-    .f-footer-cols { flex-direction: column; gap: 3vw; }
-    .f-contact-right { text-align: left; }
+    .doodle-layer { display: none; }
+
+    .f-hero {
+      padding-top: 38vw;
+      padding-left: 6vw;
+      padding-right: 6vw;
+    }
+    .f-hero-heading {
+      font-size: 9.16vw;
+      width: 73.8vw;
+    }
+    .f-hero-subtitle {
+      font-size: 4.07vw;
+      margin-top: 6vw;
+      padding-left: 0;
+      text-align: center;
+    }
+
+    .f-manifesto {
+      padding-top: 14vw;
+      padding-left: 6vw;
+      padding-right: 6vw;
+    }
+    .f-manifesto-heading {
+      font-size: 9.16vw;
+      width: 78.1vw;
+    }
+    .f-manifesto-subtitle {
+      font-size: 4.07vw;
+      margin-top: 4vw;
+      padding-left: 0;
+      text-align: center;
+    }
+
+    .f-illustrations {
+      padding-top: 10vw;
+    }
+    .f-illust-title {
+      font-size: 9.16vw;
+    }
+    .f-illust-sub {
+      font-size: 4.07vw;
+    }
+    .f-illust-view {
+      font-size: 4.07vw;
+    }
+
+    .f-projects {
+      padding-top: 10vw;
+    }
+    .f-proj-title {
+      font-size: 9.16vw;
+    }
+    .f-proj-sub {
+      font-size: 4.07vw;
+    }
+    .f-proj-view {
+      font-size: 4.07vw;
+    }
+
+    .marquee-item {
+      width: 54.5vw;
+    }
+    .marquee-item img {
+      height: 30.5vw;
+    }
+
+    .f-services-teaser {
+      display: block;
+      padding: 14vw 6vw 0;
+      text-align: center;
+    }
+    .f-services-teaser-heading {
+      font-family: "NewUnderground", sans-serif;
+      font-size: 9.16vw;
+      font-weight: 500;
+      line-height: 1.057;
+      text-align: center;
+    }
+    .f-services-teaser-body {
+      font-family: "Sugarpie", cursive;
+      font-size: 4.07vw;
+      font-weight: 400;
+      line-height: 1.5;
+      margin-top: 4vw;
+    }
+    .f-services-teaser-link {
+      font-family: "Sugarpie", cursive;
+      font-size: 4.07vw;
+      display: block;
+      margin-top: 3vw;
+    }
+
+    .f-footer {
+      padding-top: 14vw;
+      padding-left: 6vw;
+      padding-right: 6vw;
+      padding-bottom: 8vw;
+    }
+    .f-say-hello {
+      font-size: 9.16vw;
+    }
+    .f-promise {
+      font-size: 4.07vw;
+    }
+    .f-footer-cols {
+      flex-direction: column;
+      align-items: center;
+      gap: 6vw;
+      margin-top: 10vw;
+    }
+    .f-collab {
+      font-size: 9.16vw;
+      width: 85.7vw;
+    }
+    .f-contact-right {
+      text-align: center;
+    }
+    .f-contact-label {
+      font-size: 6.87vw;
+    }
+    .f-contact-email {
+      font-size: 6.87vw;
+      margin-top: 4vw;
+    }
+    .f-footer-bar {
+      flex-direction: column;
+      align-items: center;
+      gap: 3vw;
+      margin-top: 10vw;
+    }
+    .f-bottom-email {
+      font-size: 4.07vw;
+    }
+    .f-social {
+      font-size: 4.07vw;
+    }
   }
 </style>

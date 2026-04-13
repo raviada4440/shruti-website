@@ -60,10 +60,15 @@ const current = works.find((w) => w.slug === slug)!;
     )}
 
     <div class="cta-section">
+      <div class="cta-footer-nav">
+        <a href="/services" class="footer-nav-link">services</a>
+        <a href="/works" class="footer-nav-link">works</a>
+      </div>
       <h2 class="cta-heading">Like what you see?</h2>
       <img src="/images/doodles/individual-doodle-2.png" alt="" class="cta-doodle-arrow" />
       <p class="cta-subheading">contact me!</p>
       <a href="mailto:shrutiada19@gmail.com" class="cta-email">shrutiada19@gmail.com</a>
+      <a href="https://www.instagram.com" target="_blank" rel="noopener" class="cta-social">social media</a>
       <img src="/images/doodles/individual-doodle-1.png" alt="" class="cta-doodle-monster" />
     </div>
 
@@ -247,9 +252,92 @@ const current = works.find((w) => w.slug === slug)!;
     pointer-events: none;
   }
 
+  .cta-footer-nav { display: none; }
+  .cta-social { display: none; }
+
   @keyframes scroll-rtl {
     0% { transform: translateX(0); }
     100% { transform: translateX(-50%); }
+  }
+
+  @media (max-width: 768px) {
+    .project-info {
+      padding: 38vw 6vw 4vw;
+    }
+    .project-title {
+      font-size: 9.16vw;
+    }
+    .project-description {
+      font-size: 4.07vw;
+      max-width: 84.5vw;
+      margin-top: 4vw;
+    }
+    .project-subtitle {
+      font-size: 4.07vw;
+    }
+
+    .section-fullwidth {
+      padding: 3vw 6vw;
+    }
+
+    .marquee-item { width: 46.1vw; }
+    .marquee-item img { height: 26vw; }
+
+    .section-masonry { padding: 3vw 6vw; }
+    .masonry-grid { columns: 1; }
+    .section-label { font-size: 4.07vw; }
+
+    .cta-section {
+      min-height: auto;
+      padding: 8vw 6vw 10vw;
+    }
+    .cta-footer-nav {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 6vw;
+    }
+    .footer-nav-link {
+      font-family: "Sugarpie", cursive;
+      font-size: 4.07vw;
+      color: inherit;
+      text-decoration: none;
+      transition: opacity 0.3s;
+    }
+    .footer-nav-link:hover { opacity: 0.6; }
+
+    .cta-heading { font-size: 9.16vw; }
+    .cta-doodle-arrow {
+      left: auto;
+      right: 2vw;
+      top: 18vw;
+      width: 41.2vw;
+    }
+    .cta-subheading {
+      font-size: 9.16vw;
+      margin-top: 8vw;
+      text-align: left;
+    }
+    .cta-email {
+      font-size: 4.58vw;
+      text-align: center;
+      margin-top: 3vw;
+    }
+    .cta-social {
+      display: block;
+      font-family: "Sugarpie", cursive;
+      font-size: 4.07vw;
+      text-align: center;
+      text-decoration: none;
+      color: inherit;
+      margin-top: 3vw;
+      transition: opacity 0.3s;
+    }
+    .cta-social:hover { opacity: 0.6; }
+    .cta-doodle-monster {
+      right: 2vw;
+      top: 18vw;
+      width: 41.2vw;
+    }
   }
 </style>
 

@@ -13,7 +13,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
     <!-- Branding -->
     <section class="service-block service-left">
-      <h2 class="service-heading">branding</h2>
+      <h2 class="service-heading"><span class="service-heading-text">branding</span><span class="accordion-arrow">&#x25BC;</span></h2>
       <div class="service-body">
         <p class="service-text align-left">Let's make your business unforgettable. (In the good way.)
 
@@ -26,8 +26,8 @@ Includes: Art Direction, Market Research, Logo Design & Brand Identity</p>
 
     <!-- Illustrations & Iconography -->
     <section class="service-block service-right">
-      <h2 class="service-heading align-right">+illustrations
-+=and Iconography</h2>
+      <h2 class="service-heading align-right"><span class="service-heading-text">+illustrations
++=and Iconography</span><span class="accordion-arrow">&#x25BC;</span></h2>
       <div class="service-body">
         <p class="service-text align-right">This is my love language. Seriously.
 
@@ -40,7 +40,7 @@ Includes: Editorial Illustration, Custom Iconography, Commercial & Conceptual Ar
 
     <!-- Social Media Content -->
     <section class="service-block service-left">
-      <h2 class="service-heading">social media content</h2>
+      <h2 class="service-heading"><span class="service-heading-text">social media content</span><span class="accordion-arrow">&#x25BC;</span></h2>
       <div class="service-body">
         <p class="service-text align-left">A website so you,(your mom) will finally understand what you do.
 
@@ -52,7 +52,7 @@ Includes: UI Design, Layout & Visual Hierarchy, Brand-Aligned Web Experience</p>
 
     <!-- Website Design -->
     <section class="service-block service-right">
-      <h2 class="service-heading align-right">website design</h2>
+      <h2 class="service-heading align-right"><span class="service-heading-text">website design</span><span class="accordion-arrow">&#x25BC;</span></h2>
       <div class="service-body">
         <p class="service-text align-right">Because "I'll just post something later" is not a strategy.
 
@@ -80,6 +80,7 @@ Includes: Social Media Graphics, Post Templates, Digital Invitations, Email Head
         <a href="https://www.instagram.com" target="_blank" rel="noopener" class="bottom-link">instagram</a>
         <a href="https://www.linkedin.com" target="_blank" rel="noopener" class="bottom-link">linkedin</a>
       </div>
+      <img src="/images/doodles/services-doodle-3.png" alt="" class="bottom-doodle" />
     </section>
 
   </div>
@@ -270,4 +271,131 @@ Includes: Social Media Graphics, Post Templates, Digital Invitations, Email Head
   .bottom-link:hover {
     opacity: 0.7;
   }
+
+  .accordion-arrow {
+    display: none;
+  }
+
+  .bottom-doodle {
+    display: none;
+  }
+
+  @media (max-width: 768px) {
+    .services-hero {
+      padding: 38vw 6vw 4vw;
+    }
+    .services-title {
+      font-size: 9.16vw;
+    }
+    .services-subtitle {
+      font-size: 4.07vw;
+      margin-top: 2vw;
+    }
+
+    .service-block {
+      padding: 4vw 6vw;
+    }
+    .service-heading {
+      font-size: 9.16vw;
+      text-align: left !important;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 3vw;
+    }
+    .service-heading-text {
+      flex: 1;
+    }
+    .accordion-arrow {
+      display: inline-block;
+      font-size: 4vw;
+      transition: transform 0.3s;
+      flex-shrink: 0;
+    }
+    .service-heading.is-open .accordion-arrow {
+      transform: rotate(180deg);
+    }
+
+    .service-body {
+      display: none;
+      margin-top: 3vw;
+    }
+    .service-body.is-open {
+      display: block;
+    }
+    .service-text {
+      font-size: 4.07vw;
+      text-align: left !important;
+      max-width: 100%;
+    }
+
+    .service-doodle { display: none; }
+
+    .interested-section {
+      padding: 10vw 6vw 0;
+      min-height: auto;
+    }
+    .interested-heading {
+      font-size: 8.14vw;
+      text-align: center;
+    }
+    .interested-sub {
+      font-size: 4.07vw;
+      text-align: center;
+    }
+    .interested-label {
+      font-size: 4.07vw;
+      text-align: center;
+      margin-top: 1vw;
+    }
+    .interested-email {
+      font-size: 4.07vw;
+      text-align: center;
+    }
+    .interested-doodle {
+      display: none;
+    }
+
+    .bottom-section {
+      padding: 2vw 6vw 10vw;
+      text-align: center;
+      position: relative;
+    }
+    .bottom-heading {
+      font-size: 8.14vw;
+      text-align: center;
+    }
+    .bottom-links {
+      align-items: center;
+      gap: 3vw;
+      margin-top: 4vw;
+    }
+    .bottom-link {
+      font-size: 4.07vw;
+    }
+    .bottom-doodle {
+      display: block;
+      width: 35vw;
+      margin: -18vw 0 0 auto;
+    }
+  }
 </style>
+
+<script>
+  if (window.matchMedia('(max-width: 768px)').matches) {
+    document.querySelectorAll('.service-heading').forEach((heading) => {
+      heading.addEventListener('click', () => {
+        const body = heading.nextElementSibling;
+        if (!body) return;
+        const isOpen = body.classList.contains('is-open');
+        document.querySelectorAll('.service-body').forEach((b) => b.classList.remove('is-open'));
+        document.querySelectorAll('.service-heading').forEach((h) => h.classList.remove('is-open'));
+        if (!isOpen) {
+          body.classList.add('is-open');
+          heading.classList.add('is-open');
+        }
+      });
+    });
+  }
+</script>

@@ -34,6 +34,10 @@
     background: rgba(0, 0, 0, 0.15);
   }
 
+  img::selection {
+    background: transparent;
+  }
+
   h1, h2, h3, h4 {
     font-family: "NewUnderground", sans-serif;
     font-weight: 500;
@@ -135,4 +139,10 @@
     .lightbox-prev-btn { left: 1.5rem; }
     .lightbox-next-btn { right: 1.5rem; }
   }
+}
+
+img[src*="/images/doodles/"],
+img[src*="shruti-ada-logo"],
+img[src*="doodle"] {
+  mix-blend-mode: multiply !important;
 }

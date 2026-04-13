@@ -9,12 +9,13 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     <section class="about-hero">
       <img src="/images/doodles/about-doodle-topleft.png" alt="" class="doodle doodle-topleft" />
       <h1 class="about-title">learn about me!</h1>
-      <img src="/images/about/doodle-top-right.png" alt="" class="doodle doodle-topright" />
+      <img src="/images/doodles/about-doodle-topright.png" alt="" class="doodle doodle-topright doodle-topright-desktop" />
 
       <div class="photo-grid">
         <img src="/images/about/photo-1.png" alt="Shruti Ada" class="photo photo-left" />
         <p class="intro-tagline">texan raised</p>
-        <p class="intro-name">as you know my name is shruti</p>
+        <p class="intro-name">as you know my<br class="mobile-break"/>name is shruti</p>
+        <img src="/images/doodles/about-doodle-topright.png" alt="" class="doodle doodle-topright-mobile" />
         <img src="/images/about/photo-2.png" alt="Shruti Ada" class="photo photo-right" />
       </div>
 
@@ -97,6 +98,10 @@ Whether you're building a brand from scratch, need a website that finally looks 
     pointer-events: none;
   }
 
+  .doodle-topright-mobile {
+    display: none;
+  }
+
   /* Photo grid */
   .photo-grid {
     position: relative;
@@ -133,6 +138,9 @@ Whether you're building a brand from scratch, need a website that finally looks 
     line-height: 1.4;
   }
 
+  .mobile-break {
+    display: none;
+  }
   .intro-name {
     position: absolute;
     left: 56vw;
@@ -256,5 +264,142 @@ Whether you're building a brand from scratch, need a website that finally looks 
     display: block;
     margin: 4vw auto 0;
     width: 32.5vw;
+  }
+
+  @media (max-width: 768px) {
+    .about-hero {
+      padding: 38vw 6vw 0;
+    }
+    .about-title {
+      font-size: 8.14vw;
+      text-align: left;
+    }
+
+    .doodle-topleft { display: none; }
+    .doodle-topright-desktop { display: none; }
+    .doodle-topright-mobile {
+      display: block;
+      position: relative;
+      width: 30vw;
+      align-self: flex-end;
+      margin-right: -8vw;
+      margin-top: -4vw;
+      margin-bottom: -4vw;
+    }
+
+    .photo-grid {
+      margin-top: 6vw;
+      min-height: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 4vw;
+    }
+    .photo {
+      position: relative;
+    }
+    .photo-left {
+      left: 0;
+      top: auto;
+      width: 53.4vw;
+      height: 36.9vw;
+    }
+    .photo-right {
+      right: auto;
+      top: auto;
+      align-self: flex-end;
+      width: 50.1vw;
+      height: 50.1vw;
+    }
+    .intro-tagline {
+      position: relative;
+      left: auto;
+      top: auto;
+      font-size: 4.07vw;
+      text-align: right;
+      margin-top: -42vw;
+      padding-right: 0;
+    }
+    .intro-name {
+      position: relative;
+      left: auto;
+      top: auto;
+      font-size: 4.07vw;
+      text-align: right;
+    }
+    .mobile-break {
+      display: block;
+    }
+
+    .intro-text-left {
+      padding: 4vw 0 0;
+      max-width: 100%;
+    }
+    .intro-nickname {
+      font-size: 4.07vw;
+    }
+    .intro-bio {
+      font-size: 4.07vw;
+      margin-top: 6vw;
+    }
+
+    .about-bio {
+      padding: 6vw;
+    }
+    .bio-text {
+      font-size: 4.07vw;
+      max-width: 100%;
+    }
+
+    .about-likes {
+      padding: 4vw 6vw 6vw;
+    }
+    .likes-heading {
+      font-size: 4.07vw;
+      text-align: center;
+    }
+    .likes-scatter {
+      height: auto;
+      margin-top: 12vw;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      column-gap: 8vw;
+      row-gap: 4vw;
+    }
+    .like-item {
+      font-size: 4.07vw;
+      position: relative !important;
+      left: auto !important;
+      top: auto !important;
+      width: 24vw;
+      text-align: center;
+    }
+    .doodle-likes {
+      right: 2vw;
+      top: 14vw;
+      width: 20vw;
+    }
+
+    .about-cta {
+      padding: 6vw 6vw 10vw;
+    }
+    .cta-heading {
+      font-size: 8.14vw;
+      max-width: 100%;
+      text-align: center;
+    }
+    .cta-label {
+      font-size: 8.14vw;
+      margin-top: 8vw;
+      text-align: center;
+    }
+    .cta-email {
+      font-size: 4.07vw;
+      text-align: center;
+    }
+    .doodle-bottom {
+      width: 47.3vw;
+      margin: 6vw auto 0;
+    }
   }
 </style>

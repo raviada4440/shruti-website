@@ -56,6 +56,21 @@ import { works } from "../data/portfolio";
       </div>
     </div>
 
+    <footer class="gallery-footer">
+      <div class="gallery-footer-doodles">
+        <img src="/images/doodles/m-illust-footer-creature-l.png" alt="" class="footer-doodle footer-doodle-left" />
+        <img src="/images/doodles/m-illust-footer-creature-r.png" alt="" class="footer-doodle footer-doodle-right" />
+      </div>
+      <div class="gallery-footer-nav">
+        <a href="/illustrations" class="footer-nav-link">illustrations</a>
+        <a href="/about" class="footer-nav-link">about</a>
+      </div>
+      <div class="gallery-footer-bar">
+        <a href="mailto:shrutiada19@gmail.com" class="footer-bar-link">shrutiada19@gmail.com</a>
+        <a href="https://www.instagram.com" target="_blank" rel="noopener" class="footer-bar-link">social media</a>
+      </div>
+    </footer>
+
   </div>
 </BaseLayout>
 
@@ -138,5 +153,65 @@ import { works } from "../data/portfolio";
   @keyframes scroll-ltr {
     0% { transform: translateX(-50%); }
     100% { transform: translateX(0); }
+  }
+
+  .gallery-footer { display: none; }
+
+  @media (max-width: 768px) {
+    .gallery-page { padding-top: 38vw; }
+
+    .gallery-title {
+      font-size: 9.16vw;
+      text-align: center;
+      padding-left: 0;
+    }
+
+    .gallery-doodle-wrap {
+      margin-top: 0;
+      margin-bottom: 6vw;
+      padding-left: 2vw;
+    }
+    .gallery-doodle { width: 44vw; }
+
+    .marquee-item { width: 46.1vw; }
+    .marquee-item img { height: 26vw; }
+    .marquee-wrap { margin-bottom: 3vw; }
+
+    .gallery-footer {
+      display: block;
+      padding: 12vw 6vw 8vw;
+    }
+    .gallery-footer-doodles {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+    .footer-doodle {
+      object-fit: contain;
+      pointer-events: none;
+    }
+    .footer-doodle-left { width: 19.1vw; }
+    .footer-doodle-right { width: 16.5vw; }
+    .gallery-footer-nav {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 4vw;
+    }
+    .gallery-footer-bar {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 6vw;
+    }
+    .footer-nav-link,
+    .footer-bar-link {
+      font-family: "Sugarpie", cursive;
+      font-size: 4.07vw;
+      font-weight: 400;
+      color: inherit;
+      text-decoration: none;
+      transition: opacity 0.3s;
+    }
+    .footer-nav-link:hover,
+    .footer-bar-link:hover { opacity: 0.6; }
   }
 </style>
