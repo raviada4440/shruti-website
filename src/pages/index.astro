@@ -23,13 +23,13 @@ import { illustrations, works } from "../data/portfolio";
 
     {/* ── Manifesto ── */}
     <section class="f-section f-manifesto">
-      <h2 class="f-manifesto-heading">Every project gets my whole heart, not just my hands</h2>
+      <h2 class="f-manifesto-heading" data-typewriter>Every project gets my whole heart, not just my hands</h2>
       <p class="f-manifesto-subtitle">My works are my babies, I raise them from the ground up</p>
     </section>
 
     {/* ── Illustrations ── */}
     <section id="illustrations" class="f-section f-illustrations">
-      <h2 class="f-illust-title">illustrations</h2>
+      <h2 class="f-illust-title" data-typewriter>illustrations</h2>
       <p class="f-illust-sub">( a plethora of illustrative art works here)</p>
 
       <div class="marquee-wrap">
@@ -52,7 +52,7 @@ import { illustrations, works } from "../data/portfolio";
 
     {/* ── Projects ── */}
     <section id="works" class="f-section f-projects">
-      <h2 class="f-proj-title">works</h2>
+      <h2 class="f-proj-title" data-typewriter>works</h2>
       <p class="f-proj-sub">( a plethora of projects art works here)</p>
 
       <div class="marquee-wrap">
@@ -75,14 +75,14 @@ import { illustrations, works } from "../data/portfolio";
 
     {/* ── Services teaser (mobile only) ── */}
     <section class="f-section f-services-teaser">
-      <h2 class="f-services-teaser-heading">Here are the services I provide</h2>
+      <h2 class="f-services-teaser-heading" data-typewriter>Here are the services I provide</h2>
       <p class="f-services-teaser-body">branding, website design, illustrations & iconography, social media content</p>
       <a href="/services" class="f-link f-services-teaser-link">learn more here</a>
     </section>
 
     {/* ── Footer ── */}
     <section class="f-section f-footer">
-      <h2 class="f-say-hello">Say Hello!</h2>
+      <h2 class="f-say-hello" data-typewriter>Say Hello!</h2>
       <p class="f-promise">I promise I dont bite.....maybe</p>
 
       <div class="f-footer-cols">
@@ -488,3 +488,42 @@ import { illustrations, works } from "../data/portfolio";
     }
   }
 </style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const els = document.querySelectorAll('[data-typewriter]');
+
+    els.forEach((el) => {
+      const fullText = el.textContent || '';
+      const speed = parseInt(el.getAttribute('data-typewriter-speed') || '80', 10);
+      const rect = el.getBoundingClientRect();
+      const alreadyVisible = rect.top < window.innerHeight && rect.bottom > 0;
+
+      if (alreadyVisible) return;
+
+      el.textContent = '';
+      el.style.visibility = 'visible';
+      let typed = false;
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !typed) {
+            typed = true;
+            observer.unobserve(el);
+            let i = 0;
+            const tick = () => {
+              if (i <= fullText.length) {
+                el.textContent = fullText.slice(0, i);
+                i++;
+                setTimeout(tick, speed);
+              }
+            };
+            tick();
+          }
+        });
+      }, { threshold: 0.3 });
+
+      observer.observe(el);
+    });
+  });
+</script>

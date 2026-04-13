@@ -6,14 +6,14 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   <div class="services-page">
 
     <div class="services-hero">
-      <h1 class="services-title">Services</h1>
+      <h1 class="services-title" data-typewriter>Services</h1>
       <p class="services-subtitle">curious as to what i can offer you?</p>
       <p class="services-subtitle">well its branding, illustrations & iconography, social media content, and website design</p>
     </div>
 
     <!-- Branding -->
     <section class="service-block service-left">
-      <h2 class="service-heading"><span class="service-heading-text">branding</span><span class="accordion-arrow">&#x25BC;</span></h2>
+      <h2 class="service-heading"><span class="service-heading-text" data-typewriter>branding</span><span class="accordion-arrow">&#x25BC;</span></h2>
       <div class="service-body">
         <p class="service-text align-left">Let's make your business unforgettable. (In the good way.)
 
@@ -26,7 +26,7 @@ Includes: Art Direction, Market Research, Logo Design & Brand Identity</p>
 
     <!-- Illustrations & Iconography -->
     <section class="service-block service-right">
-      <h2 class="service-heading align-right"><span class="service-heading-text">+illustrations
+      <h2 class="service-heading align-right"><span class="service-heading-text" data-typewriter>+illustrations
 +=and Iconography</span><span class="accordion-arrow">&#x25BC;</span></h2>
       <div class="service-body">
         <p class="service-text align-right">This is my love language. Seriously.
@@ -40,7 +40,7 @@ Includes: Editorial Illustration, Custom Iconography, Commercial & Conceptual Ar
 
     <!-- Social Media Content -->
     <section class="service-block service-left">
-      <h2 class="service-heading"><span class="service-heading-text">social media content</span><span class="accordion-arrow">&#x25BC;</span></h2>
+      <h2 class="service-heading"><span class="service-heading-text" data-typewriter>social media content</span><span class="accordion-arrow">&#x25BC;</span></h2>
       <div class="service-body">
         <p class="service-text align-left">A website so you,(your mom) will finally understand what you do.
 
@@ -52,7 +52,7 @@ Includes: UI Design, Layout & Visual Hierarchy, Brand-Aligned Web Experience</p>
 
     <!-- Website Design -->
     <section class="service-block service-right">
-      <h2 class="service-heading align-right"><span class="service-heading-text">website design</span><span class="accordion-arrow">&#x25BC;</span></h2>
+      <h2 class="service-heading align-right"><span class="service-heading-text" data-typewriter>website design</span><span class="accordion-arrow">&#x25BC;</span></h2>
       <div class="service-body">
         <p class="service-text align-right">Because "I'll just post something later" is not a strategy.
 
@@ -65,7 +65,7 @@ Includes: Social Media Graphics, Post Templates, Digital Invitations, Email Head
     <!-- Interested CTA -->
     <section class="interested-section">
       <div class="interested-text">
-        <h2 class="interested-heading">Interested?</h2>
+        <h2 class="interested-heading" data-typewriter>Interested?</h2>
         <p class="interested-sub">thank god.</p>
         <p class="interested-label">email me here:</p>
         <a href="mailto:shrutiada19@gmail.com" class="interested-email">shrutiada19@gmail.com</a>
@@ -75,7 +75,7 @@ Includes: Social Media Graphics, Post Templates, Digital Invitations, Email Head
 
     <!-- Bottom scroll section -->
     <section class="bottom-section">
-      <h2 class="bottom-heading">if you wanna scroll</h2>
+      <h2 class="bottom-heading" data-typewriter>if you wanna scroll</h2>
       <div class="bottom-links">
         <a href="https://www.instagram.com" target="_blank" rel="noopener" class="bottom-link">instagram</a>
         <a href="https://www.linkedin.com" target="_blank" rel="noopener" class="bottom-link">linkedin</a>
@@ -398,4 +398,37 @@ Includes: Social Media Graphics, Post Templates, Digital Invitations, Email Head
       });
     });
   }
+
+  const els = document.querySelectorAll('[data-typewriter]');
+  const speed = 45;
+  els.forEach((el) => {
+    const fullText = el.textContent || '';
+    const speed = parseInt(el.getAttribute('data-typewriter-speed') || '80', 10);
+    const rect = el.getBoundingClientRect();
+    const alreadyVisible = rect.top < window.innerHeight && rect.bottom > 0;
+
+    if (alreadyVisible) return;
+
+    el.textContent = '';
+    el.style.visibility = 'visible';
+    let typed = false;
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting && !typed) {
+          typed = true;
+          observer.unobserve(el);
+          let i = 0;
+          const tick = () => {
+            if (i <= fullText.length) {
+              el.textContent = fullText.slice(0, i);
+              i++;
+              setTimeout(tick, speed);
+            }
+          };
+          tick();
+        }
+      });
+    }, { threshold: 0.3 });
+    observer.observe(el);
+  });
 </script>
