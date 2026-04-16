@@ -1,6 +1,42 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import type { WorkItem } from "../data/portfolio";
 import { works } from "../data/portfolio";
+
+type GalleryTile = { href: string; src: string; alt: string };
+
+function tilesForProject(item: WorkItem): GalleryTile[] {
+  const imgs = item.galleryImages?.length ? item.galleryImages : [item.src];
+  const customLinks = item.galleryLinks;
+  const useCustom = customLinks?.length === imgs.length;
+  return imgs.map((src, i) => ({
+    href: useCustom ? customLinks![i]! : `/works/${item.slug}`,
+    src,
+    alt: imgs.length > 1 ? `${item.alt} — ${i + 1}` : item.alt,
+  }));
+}
+
+/** Round-robin interleave so Avid / munch’d / Red Water mix in the strip (each image once; larger projects continue after smaller ones exhaust). */
+const perProject = works.map(tilesForProject);
+const maxLen = perProject.reduce((m, row) => Math.max(m, row.length), 0);
+const galleryTiles: GalleryTile[] = [];
+for (let i = 0; i < maxLen; i++) {
+  for (const row of perProject) {
+    if (i < row.length) galleryTiles.push(row[i]!);
+  }
+}
+
+function rotateTiles<T>(tiles: T[], offset: number): T[] {
+  if (!tiles.length) return tiles;
+  const o = ((offset % tiles.length) + tiles.length) % tiles.length;
+  return [...tiles.slice(o), ...tiles.slice(0, o)];
+}
+
+/** Same tiles, different order per row so the three strips don’t show the same sequence in sync. */
+const n = galleryTiles.length;
+const galleryTilesRow1 = galleryTiles;
+const galleryTilesRow2 = rotateTiles(galleryTiles, n > 1 ? Math.max(1, Math.floor(n / 3)) % n : 0);
+const galleryTilesRow3 = rotateTiles(galleryTiles, n > 2 ? Math.floor((2 * n) / 3) : 0);
 ---
 
 <BaseLayout title="Works — Shruti Ada">
@@ -13,14 +49,14 @@ import { works } from "../data/portfolio";
 
     <div class="marquee-wrap marquee-rtl">
       <div class="marquee-track">
-        {works.map((item) => (
-          <a href={`/works/${item.slug}`} class="marquee-item">
-            <img src={item.src} alt={item.alt} loading="lazy" />
+        {galleryTilesRow1.map((tile) => (
+          <a href={tile.href} class="marquee-item">
+            <img src={tile.src} alt={tile.alt} loading="lazy" />
           </a>
         ))}
-        {works.map((item) => (
-          <a href={`/works/${item.slug}`} class="marquee-item" aria-hidden="true" tabindex="-1">
-            <img src={item.src} alt={item.alt} loading="lazy" />
+        {galleryTilesRow1.map((tile) => (
+          <a href={tile.href} class="marquee-item" aria-hidden="true" tabindex="-1">
+            <img src={tile.src} alt={tile.alt} loading="lazy" />
           </a>
         ))}
       </div>
@@ -28,14 +64,14 @@ import { works } from "../data/portfolio";
 
     <div class="marquee-wrap marquee-ltr">
       <div class="marquee-track">
-        {works.map((item) => (
-          <a href={`/works/${item.slug}`} class="marquee-item">
-            <img src={item.src} alt={item.alt} loading="lazy" />
+        {galleryTilesRow2.map((tile) => (
+          <a href={tile.href} class="marquee-item">
+            <img src={tile.src} alt={tile.alt} loading="lazy" />
           </a>
         ))}
-        {works.map((item) => (
-          <a href={`/works/${item.slug}`} class="marquee-item" aria-hidden="true" tabindex="-1">
-            <img src={item.src} alt={item.alt} loading="lazy" />
+        {galleryTilesRow2.map((tile) => (
+          <a href={tile.href} class="marquee-item" aria-hidden="true" tabindex="-1">
+            <img src={tile.src} alt={tile.alt} loading="lazy" />
           </a>
         ))}
       </div>
@@ -43,14 +79,14 @@ import { works } from "../data/portfolio";
 
     <div class="marquee-wrap marquee-rtl">
       <div class="marquee-track">
-        {works.map((item) => (
-          <a href={`/works/${item.slug}`} class="marquee-item">
-            <img src={item.src} alt={item.alt} loading="lazy" />
+        {galleryTilesRow3.map((tile) => (
+          <a href={tile.href} class="marquee-item">
+            <img src={tile.src} alt={tile.alt} loading="lazy" />
           </a>
         ))}
-        {works.map((item) => (
-          <a href={`/works/${item.slug}`} class="marquee-item" aria-hidden="true" tabindex="-1">
-            <img src={item.src} alt={item.alt} loading="lazy" />
+        {galleryTilesRow3.map((tile) => (
+          <a href={tile.href} class="marquee-item" aria-hidden="true" tabindex="-1">
+            <img src={tile.src} alt={tile.alt} loading="lazy" />
           </a>
         ))}
       </div>
@@ -113,11 +149,11 @@ import { works } from "../data/portfolio";
   }
 
   .marquee-rtl .marquee-track {
-    animation: scroll-rtl 160s linear infinite;
+    animation: scroll-rtl 280s linear infinite;
   }
 
   .marquee-ltr .marquee-track {
-    animation: scroll-ltr 160s linear infinite;
+    animation: scroll-ltr 280s linear infinite;
   }
 
   .marquee-wrap:hover .marquee-track {

@@ -3,9 +3,11 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import { works } from "../../data/portfolio";
 
 export function getStaticPaths() {
-  return works.map((item) => ({
-    params: { slug: item.slug },
-  }));
+  return works
+    .filter((item) => item.slug !== "munchd")
+    .map((item) => ({
+      params: { slug: item.slug },
+    }));
 }
 
 const { slug } = Astro.params;
@@ -13,13 +15,30 @@ const current = works.find((w) => w.slug === slug)!;
 ---
 
 <BaseLayout title={`${current.title} — Shruti Ada`}>
-  <div class="works-detail">
+  <div
+    class:list={[
+      "works-detail",
+      current.slug === "avid-bioservices" && "works-detail--avid-bio",
+      current.slug === "red-water" && "works-detail--red-water",
+    ]}
+  >
 
     <div class="project-info">
-      <h1 class="project-title">{current.title}</h1>
-      {current.description && (
-        <p class="project-description">{current.description}</p>
+      {current.titleLogo ? (
+        <h1 class="project-title project-title--logo">
+          <img src={current.titleLogo} alt={current.alt} class="project-title-logo" />
+        </h1>
+      ) : (
+        <h1 class="project-title">{current.title}</h1>
       )}
+      {current.description &&
+        (current.slug === "red-water" ? (
+          current.description.split("\n\n").map((block) => (
+            <p class="project-description">{block}</p>
+          ))
+        ) : (
+          <p class="project-description">{current.description}</p>
+        ))}
       {current.subtitle && (
         <p class="project-subtitle">{current.subtitle}</p>
       )}
@@ -91,6 +110,20 @@ const current = works.find((w) => w.slug === slug)!;
     font-size: 4.6886vw;
     font-weight: 500;
     line-height: 1.057;
+  }
+
+  .project-title--logo {
+    margin: 0;
+    line-height: 0;
+  }
+
+  .project-title-logo {
+    width: 42vw;
+    max-width: 90%;
+    height: auto;
+    display: inline-block;
+    vertical-align: top;
+    object-fit: contain;
   }
 
   .project-description {
@@ -267,6 +300,11 @@ const current = works.find((w) => w.slug === slug)!;
     .project-title {
       font-size: 9.16vw;
     }
+
+    .project-title-logo {
+      width: 78vw;
+      max-width: 92%;
+    }
     .project-description {
       font-size: 4.07vw;
       max-width: 84.5vw;
@@ -337,6 +375,50 @@ const current = works.find((w) => w.slug === slug)!;
       right: 2vw;
       top: 18vw;
       width: 41.2vw;
+    }
+  }
+
+  /* Soleil Regular for body copy — Avid Bioservices & Red Water (except project intro) */
+  .works-detail--avid-bio .project-description,
+  .works-detail--avid-bio .project-subtitle,
+  .works-detail--avid-bio .section-label,
+  .works-detail--avid-bio .cta-email,
+  .works-detail--avid-bio .cta-social,
+  .works-detail--red-water .project-subtitle,
+  .works-detail--red-water .section-label,
+  .works-detail--red-water .cta-email,
+  .works-detail--red-water .cta-social {
+    font-family: "Soleil", ui-sans-serif, sans-serif;
+  }
+
+  .works-detail--red-water .project-description {
+    font-family: Baskerville, "Libre Baskerville", "Baskerville Old Face", "Hoefler Text", Georgia, serif;
+    font-weight: 400;
+    font-style: normal;
+    text-align: left;
+    margin-left: 0;
+    margin-right: auto;
+  }
+
+  .works-detail--red-water .project-description + .project-description {
+    margin-top: 1.6vw;
+  }
+
+  .works-detail--avid-bio .project-subtitle,
+  .works-detail--red-water .project-subtitle {
+    text-align: left;
+  }
+
+  .works-detail--avid-bio .project-description {
+    text-align: left;
+    margin-left: 0;
+    margin-right: auto;
+  }
+
+  @media (max-width: 768px) {
+    .works-detail--avid-bio .footer-nav-link,
+    .works-detail--red-water .footer-nav-link {
+      font-family: "Soleil", ui-sans-serif, sans-serif;
     }
   }
 </style>

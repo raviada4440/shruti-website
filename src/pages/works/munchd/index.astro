@@ -1,0 +1,194 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="munch'd — case study — Shruti Ada"
+  description="Munch'd — swipe-based AI recipe discovery app. UX and visual design case study."
+>
+  <div class="munchd-case-study">
+    <img
+      src="/images/works/munchd/case-study.svg"
+      alt="Munch'd — case study: swipe-based AI recipe discovery app, UX and visual design"
+      class="munchd-case-study-img"
+      decoding="async"
+      fetchpriority="high"
+    />
+  </div>
+
+  <div class="cta-section">
+    <div class="cta-footer-nav">
+      <a href="/services" class="footer-nav-link">services</a>
+      <a href="/works" class="footer-nav-link">works</a>
+    </div>
+    <h2 class="cta-heading">Like what you see?</h2>
+    <img src="/images/doodles/individual-doodle-2.png" alt="" class="cta-doodle-arrow" />
+    <p class="cta-subheading">contact me!</p>
+    <a href="mailto:shrutiada19@gmail.com" class="cta-email">shrutiada19@gmail.com</a>
+    <a href="https://www.instagram.com" target="_blank" rel="noopener" class="cta-social">social media</a>
+    <img src="/images/doodles/individual-doodle-1.png" alt="" class="cta-doodle-monster" />
+  </div>
+</BaseLayout>
+
+<style>
+  .munchd-case-study {
+    width: 100%;
+    margin: 0;
+    padding: 6vw 0 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    line-height: 0;
+    box-sizing: border-box;
+  }
+
+  .munchd-case-study-img {
+    width: 100%;
+    max-width: min(100vw, 100%);
+    height: auto;
+    display: block;
+  }
+
+  /* Same CTA as works/[slug].astro (Avid project page) */
+  .cta-section {
+    position: relative;
+    padding: 4vw 0 6vw;
+    min-height: 57vw;
+    overflow: visible;
+    color: #000;
+  }
+
+  .cta-heading {
+    font-family: "NewUnderground", sans-serif;
+    font-size: 4.6886vw;
+    font-weight: 500;
+    line-height: 1.057;
+    text-align: center;
+  }
+
+  .cta-doodle-arrow {
+    position: absolute;
+    left: 6vw;
+    top: 5.8vw;
+    width: 30vw;
+    object-fit: contain;
+    pointer-events: none;
+  }
+
+  .cta-subheading {
+    position: relative;
+    font-family: "NewUnderground", sans-serif;
+    font-size: 4.6886vw;
+    font-weight: 500;
+    line-height: 1.057;
+    text-align: center;
+    margin-top: 12vw;
+  }
+
+  .cta-email {
+    position: relative;
+    display: block;
+    margin-top: 1vw;
+    font-family: "Sugarpie", cursive;
+    font-size: 3.5139vw;
+    font-weight: 400;
+    text-decoration: none;
+    color: inherit;
+    text-align: center;
+    transition: opacity 0.3s;
+  }
+
+  .cta-email:hover {
+    opacity: 0.7;
+  }
+
+  .cta-doodle-monster {
+    position: absolute;
+    right: -4vw;
+    top: 14vw;
+    width: 37vw;
+    object-fit: contain;
+    pointer-events: none;
+  }
+
+  .cta-footer-nav {
+    display: none;
+  }
+
+  .cta-social {
+    display: none;
+  }
+
+  @media (max-width: 768px) {
+    .cta-section {
+      min-height: auto;
+      padding: 8vw 6vw 10vw;
+    }
+
+    .cta-footer-nav {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 6vw;
+    }
+
+    .footer-nav-link {
+      font-family: "Sugarpie", cursive;
+      font-size: 4.07vw;
+      color: inherit;
+      text-decoration: none;
+      transition: opacity 0.3s;
+    }
+
+    .footer-nav-link:hover {
+      opacity: 0.6;
+    }
+
+    .cta-heading {
+      font-size: 9.16vw;
+    }
+
+    .cta-doodle-arrow {
+      left: auto;
+      right: 2vw;
+      top: 18vw;
+      width: 41.2vw;
+    }
+
+    .cta-subheading {
+      font-size: 9.16vw;
+      margin-top: 8vw;
+      text-align: left;
+    }
+
+    .cta-email {
+      font-size: 4.58vw;
+      text-align: center;
+      margin-top: 3vw;
+    }
+
+    .cta-social {
+      display: block;
+      font-family: "Sugarpie", cursive;
+      font-size: 4.07vw;
+      text-align: center;
+      text-decoration: none;
+      color: inherit;
+      margin-top: 3vw;
+      transition: opacity 0.3s;
+    }
+
+    .cta-social:hover {
+      opacity: 0.6;
+    }
+
+    .cta-doodle-monster {
+      right: 2vw;
+      top: 18vw;
+      width: 41.2vw;
+    }
+
+    .munchd-case-study {
+      padding-top: 38vw;
+    }
+  }
+</style>
